@@ -1,0 +1,87 @@
+@startuml AcademiaDev
+
+skinparam classAttributeIconSize 0
+
+class Course {
+  - title: String
+  - description: String
+  - instructorName: String
+  - durationInHours: Integer
+  - difficultyLevel: enum { BEGINNER, INTERMEDIATE, ADVANCED }
+  - status: boolean
+  + setStatus(status: boolean)
+}
+
+class Enrollment {
+  - id: Integer
+  - student: Student
+  - course: Course
+  - progress: Integer ' 0-100
+}
+
+abstract class SubscriptionPlan {
+  # price: Double
+  + setPrice(price: Double)
+}
+
+class BasicPlan extends SubscriptionPlan {
+  + setPrice(price: Double)
+}
+
+class PremiumPlan extends SubscriptionPlan {
+  + setPrice(price: Double)
+}
+
+abstract class User {
+  - id: Integer
+  - name: String
+  - email: String
+  + openSupportTicket(title: String, message: String): SupportTicket
+  + checkCourseCatalog(): List<Course>
+  + login(email: String): boolean
+}
+
+class Student extends User {
+  - subscriptionPlan: SubscriptionPlan
+  - enrollments: List<Enrollment>
+  + setSubscriptionPlan(subscriptionPlan: SubscriptionPlan)
+  + enrollInCourse(course: Course)
+  + cancelEnrollment(course: Course)
+  + updateProgress(enrollment: Enrollment, progress: Integer)
+}
+
+class Admin extends User {
+  + manageCourseStatus(course: Course, status: boolean)
+  + changeStudentPlan(student: Student, newPlan: SubscriptionPlan)
+  + resolveSupportTicket(ticket: SupportTicket)
+  + createAnalysisReport()
+  + exportData()
+}
+
+class SupportTicket {
+  - id: Integer
+  - title: String
+  - message: String
+  - author: User
+}
+
+class SupportSystem {
+  - ticketQueue: Queue<SupportTicket>
+  + addTicket(ticket: SupportTicket)
+  + getNextTicket(): SupportTicket
+  + hasTickets(): boolean
+}
+
+
+
+Student "1" --> "1" SubscriptionPlan : assina
+
+Student "1" o-- "*" Enrollment : possui
+Course "1" o-- "*" Enrollment : refere-se
+
+User "1" --> "*" SupportTicket : abre
+
+Admin "1" ..> "1" SupportSystem : gerencia
+SupportSystem "1" o-- "*" SupportTicket : contém
+
+@enduml
