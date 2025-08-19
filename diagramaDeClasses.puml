@@ -37,7 +37,7 @@ abstract class User {
   - name: String
   - email: String
   + openSupportTicket(title: String, message: String): SupportTicket
-  + checkCourseCatalog(): List<Course>
+  + showCourseCatalog(): List<Course>
   + login(email: String): boolean
 }
 
