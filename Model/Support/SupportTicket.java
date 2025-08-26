@@ -1,3 +1,7 @@
+package Model.Support;
+
+import Model.User.User;
+
 public class SupportTicket {
 
     private Integer id;

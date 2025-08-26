@@ -1,4 +1,7 @@
+package Model.User;
 import java.util.List;
+
+import Model.Course.Course;
 
 public abstract class User {
     private static Integer nextId = 1;
