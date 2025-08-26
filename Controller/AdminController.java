@@ -1,27 +1,19 @@
 package Controller;
 
-import Model.Course.Course;
-import Model.Course.DifficultyLevel;
-import java.util.Scanner;
-import Model.Course.CourseList;
 
+import Model.Course.DifficultyLevel;
+import Service.CourseService;
 
 public class AdminController {
     
+    private final CourseService courseService;
+    public AdminController(CourseService courseService) {
+        this.courseService = courseService;
+    }
+
+
     
-    public void addCourse(CourseList courseList) {
-
-        try {
-            
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+    public void addCourse(String title, String description, String instructorName, int durationInHours, DifficultyLevel difficulty) {
+        courseService.saveCourse(title, description, instructorName, durationInHours, difficulty);
     }
-
-    public void showCoursesCatalog(CourseList courseList) {
-        courseList.showCoursesCatalog();
-    }
-
-
-
 }

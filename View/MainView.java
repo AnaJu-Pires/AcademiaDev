@@ -1,20 +1,36 @@
 package View;
 
 import Controller.AdminController;
-import Model.Course.CourseList;
+
+
+import java.util.Scanner;
 
 public class MainView {
+    private final AdminController adminController;
+    private final Scanner scanner;
 
-    public static void main(String[] args) {
-
-        CourseList courseList = new CourseList();
-
-
-        AdminView adminView = new AdminView(new AdminController());
-
-
-        adminView.showAdminMenu(courseList);
-
-        
+    public MainView(AdminController adminController) {
+        this.adminController = adminController;
+        this.scanner = new Scanner(System.in);
     }
+
+    public void displayMenu() {
+        AdminView admin = new AdminView(adminController);
+        while (true) {
+            System.out.println("1. Entrar como admin");
+            System.out.println("0. Sair");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    admin.showAdminMenu();
+                case 0:
+                    System.out.println("Saindo do menu principal");
+
+                    return;
+                default:
+                    System.out.println("Opcao invalida");
+            }
+        }
+    }
+    
 }

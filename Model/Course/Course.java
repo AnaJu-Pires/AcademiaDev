@@ -15,7 +15,7 @@ public class Course {
         this.instructorName = instructorName;
         this.durationHours = durationHours;
         this.difficultyLevel = difficultyLevel;
-        this.status = false;
+        this.status = true;
     }
 
     public String getTitle() {
@@ -68,6 +68,18 @@ public class Course {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", instructorName='" + instructorName + '\'' +
+                ", durationHours=" + durationHours +
+                ", difficultyLevel=" + difficultyLevel +
+                ", status=" + status +
+                '}';
     }
     
 

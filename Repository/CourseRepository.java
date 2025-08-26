@@ -1,30 +1,23 @@
 package Repository;
 import Model.Course.Course;
 
+
 import java.util.List;
-import java.util.Optional;
+import java.util.TreeSet;
+
+
 
 
 public interface CourseRepository {
+    TreeSet<Course> courses = new TreeSet<>();
 
-   /**
-    @param course
-    @return
-    **/
-
-    Course save(Course course);
-
-    /**
-    @param title
-    @return
-    **/
-
-    Optional<Course> findByTitle(String title);
-
-    /**
-    @return
-    **/
-    List<Course> findAll();
+    void saveCourse(Course course);
+  
+    Course searchByName(String name);
+    
+    List<Course> searchAll();
+    
+    void deleteCourse(String name);
 
 
     

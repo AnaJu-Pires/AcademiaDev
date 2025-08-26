@@ -1,61 +1,54 @@
 package Model.Course;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import Repository.CourseRepository;
 
 
-public class CourseList {
+public class CourseList implements CourseRepository{
     
-    private ArrayList<Course> courses;
+    private final List<Course> courses = new ArrayList<>();
 
     public CourseList() {
-        this.courses = new ArrayList<>();
-    }
-    
-    public CourseList(ArrayList<Course> courses) {
-        this.courses = courses;
+        saveCourse(new Course("Java", "Introdução ao Java", "Joaquim", 10, DifficultyLevel.BEGINNER));
+        saveCourse(new Course("Python", "Introdução ao Python", "Joaquim", 10, DifficultyLevel.BEGINNER));
+        saveCourse(new Course("C++", "Introdução ao C++", "Joaquim", 10, DifficultyLevel.BEGINNER));
     }
 
-    public ArrayList<Course> getCourses() {
+    @Override
+    public List<Course> searchAll() {
         return courses;
     }
 
-    public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses;
+    @Override
+    public void saveCourse(Course course) {
+        courses.add(course);
+        System.out.println("Course saved.");
     }
 
-
-    public void addCourse(Course course) {
-        this.courses.add(course);
-    }
-
-    public void removeCourse(String title) {
-        for (Course course : this.courses) {
-            if (course.getTitle().trim().equals(title)) {
-                this.courses.remove(course);
-                break;
+    @Override
+    public Course searchByName(String name) {
+        for(Course course : courses) {
+            if(course.getTitle().equals(name)) {
+                return course;
             }
         }
+        return null;
     }
 
-    public void updateCourse(String title, Course updatedCourse) {
-        for (Course course : this.courses) {
-            if (course.getTitle().trim().equals(title)) {
-                course.setTitle(updatedCourse.getTitle());
-                course.setDescription(updatedCourse.getDescription());
-                course.setInstructorName(updatedCourse.getInstructorName());
-                course.setDurationHours(updatedCourse.getDurationHours());
-                course.setDifficultyLevel(updatedCourse.getDifficultyLevel());
-                course.setStatus(updatedCourse.getStatus());
-                break;
+    @Override
+    public void deleteCourse(String name) {
+        for(Course course : courses) {
+            if(course.getTitle().equals(name)) {
+                courses.remove(course);
             }
         }
+        System.out.println("Course deleted.");
     }
 
-    public void showCoursesCatalog() {
-        System.out.println("Verificando o catálogo de cursos");
-        for(Course course : this.courses) {
-            System.out.println("-" + course.getTitle());
-        }
-    }
+
+
+    
     
 }
