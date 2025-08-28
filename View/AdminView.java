@@ -1,9 +1,13 @@
 package View;
 
+import java.util.List;
 import java.util.Scanner;
 
 import Controller.AdminController;
+import Model.Course.Course;
 import Model.Course.DifficultyLevel;
+
+import Controller.dto.CourseDto;
 
 
 
@@ -21,9 +25,12 @@ public class AdminView {
     while(true) {
         System.out.println("1. Adicionar curso");
         System.out.println("2. Remover curso");
-        System.out.println("3. Ver catálogo de cursos");
-        System.out.println("4. Ver cursos inscritos");
-        System.out.println("5. Ver tickets de suporte");
+        System.out.println("3. Editar curso");
+        System.out.println("4. Ver catalogo de cursos");
+        System.out.println("5. Buscar curso");
+        System.out.println("6. Atender ticket de suporte");
+        System.out.println("7. Ver todos os cursos");
+        System.out.println("8. Exportar dados para CSV");
         System.out.println("0. Sair");
 
         // CORREÇÃO 3: Usando o scanner para ler a opção do menu
@@ -49,7 +56,9 @@ public class AdminView {
                 String CouseDifficultyLevel = scanner.nextLine();
                 DifficultyLevel difficultyLevel = DifficultyLevel.valueOf(CouseDifficultyLevel.toUpperCase());
 
-                adminController.addCourse(CouseName, CouseDescription, CouseInstructorName, CouseDurationInHours, difficultyLevel);
+                CourseDto courseDto = new CourseDto(CouseName, CouseDescription, CouseInstructorName, CouseDurationInHours, difficultyLevel, true);
+
+                adminController.addCourse(courseDto);
                 break;
             case 2:
                 System.out.println("What is the course name: ");
@@ -57,13 +66,43 @@ public class AdminView {
                 // adminController.removeCourse(courseName);
                 break;
             case 3:
-                // adminController.showCoursesCatalog(courseList);
+                
+
                 break;
             case 4:
-                // adminController.showEnrolledCourses();
+                List<CourseDto> courses = adminController.showCoursesCatalog();
+                System.out.println("\n\n\tAvailable Courses:\n");
+                for(int i = 0; i < courses.size(); i++) {
+                    if(courses.get(i).getStatus() == true){
+
+                    System.out.print((i + 1) + ". " + courses.get(i).getTitle());
+                    System.out.print(" - Duration: " + courses.get(i).getDurationInHours() + " hours");
+                    System.out.println(" - Difficulty: " + courses.get(i).getDifficulty());
+                    
+                    }
+                    
+                }
+                    System.out.println("----------------");
                 break;
             case 5:
                 // adminController.showSupportTickets();
+                break;
+            case 6:
+                // adminController.attendSupportTicket();
+                break;
+            case 7:
+                List<CourseDto> allCourses = adminController.showCoursesCatalog();
+                System.out.println("\n\n\tAll Courses:\n");
+                for(int i = 0; i < allCourses.size(); i++) {
+                    System.out.print((i + 1) + ". " + allCourses.get(i).getTitle());
+                    System.out.print(" - Duration: " + allCourses.get(i).getDurationInHours() + " hours");
+                    System.out.print(" - Difficulty: " + allCourses.get(i).getDifficulty()); 
+                    System.out.println(" - Availability: " + allCourses.get(i).getStatus());                 
+                }
+                    System.out.println("----------------");
+                break;
+            case 8:
+                // adminController.exportToCSV();
                 break;
             case 0:
                 System.out.println("Saindo do menu de admin");

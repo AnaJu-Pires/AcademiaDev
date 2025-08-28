@@ -3,41 +3,46 @@ package Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import Repository.CourseRepository;
 import Controller.dto.CourseDto;
+import Repository.impl.CourseRepositoryImpl;
 import Model.Course.Course;
 import Model.Course.DifficultyLevel;
 
 
 
 public class CourseService {
-    private final CourseRepository courseRepository;
+        private final CourseRepositoryImpl courseRepository;
 
-    public CourseService(CourseRepository courseRepository) {
-        this.courseRepository = courseRepository;
-    }
+        public CourseService(CourseRepositoryImpl courseRepository) {
+            this.courseRepository = courseRepository;
+        }
 
-    public List<CourseDto> activatedCourses() {
-        
-        List<Course> courses = courseRepository.searchAll();
-        
-        return courses.stream().map(this::convertToDto).collect(Collectors.toList());
-    }
-
-    private CourseDto convertToDto(Course course) {
-        return new CourseDto(
-                course.getTitle(),
-                course.getDescription(),
-                course.getInstructorName(),
-                course.getDurationHours(),
-                course.getDifficultyLevel()
+        public void saveCourse(CourseDto courseDto) {
+        Course course = new Course(
+            courseDto.getTitle(),
+            courseDto.getDescription(),
+            courseDto.getInstructorName(),
+            courseDto.getDurationInHours(),
+            courseDto.getDifficulty(),
+            courseDto.getStatus()
         );
+
+
+
+        courseRepository.saveCourse(course);
     }
 
-    public void saveCourse(String title, String description, String instructorName, int durationInHours, DifficultyLevel difficulty) {
-        //aparentemente aqui vai ser feito o as exception
-        courseRepository.saveCourse(new Course(title, description , instructorName, durationInHours, difficulty));
-    }
+    public List<CourseDto> showCoursesCatalog() {
+    return courseRepository.searchAll()
+            .stream()
+            .map(course -> new CourseDto(
+                    course.getTitle(),
+                    course.getDurationHours(),
+                    course.getDifficultyLevel(),
+                    course.getStatus()
+            ))
+            .collect(Collectors.toList());
+}
 
      
 }

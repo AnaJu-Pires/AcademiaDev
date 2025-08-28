@@ -4,6 +4,7 @@ import Model.Course.Course;
 
 import java.util.List;
 import java.util.TreeSet;
+import java.util.Optional;
 
 
 
@@ -13,7 +14,7 @@ public interface CourseRepository {
 
     void saveCourse(Course course);
   
-    Course searchByName(String name);
+    Optional<Course> searchByName(String name);
     
     List<Course> searchAll();
     

@@ -18,6 +18,15 @@ public class Course {
         this.status = true;
     }
 
+    public Course(String title, String description, String instructorName, int durationHours, DifficultyLevel difficultyLevel, Boolean status) {
+        this.title = title;
+        this.description = description;
+        this.instructorName = instructorName;
+        this.durationHours = durationHours;
+        this.difficultyLevel = difficultyLevel;
+        this.status = status;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -81,11 +90,6 @@ public class Course {
                 ", status=" + status +
                 '}';
     }
+  
     
-
-
-
-     
-
-
 }

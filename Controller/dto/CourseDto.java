@@ -2,19 +2,29 @@ package Controller.dto;
 
 import Model.Course.DifficultyLevel;
 
-public class CourseDto {
-    private final String title;
-    private final String description;
-    private final String instructorName;
-    private final int durationHours;
-    private final DifficultyLevel difficultyLevel;
 
-    public CourseDto(String title, String description, String instructorName, int durationHours, DifficultyLevel difficultyLevel) {
+public class CourseDto {
+    private String title;
+    private String description;
+    private String instructorName;
+    private int durationHours;
+    private DifficultyLevel difficultyLevel;
+    private Boolean status;
+
+    public CourseDto(String title, String description, String instructorName, int durationHours, DifficultyLevel difficultyLevel, Boolean status) {
         this.title = title;
         this.description = description;
         this.instructorName = instructorName;
         this.durationHours = durationHours;
         this.difficultyLevel = difficultyLevel;
+        this.status = status;
+    }
+
+    public CourseDto(String title, int durationInHours, DifficultyLevel difficulty, Boolean status) {
+        this.title = title;
+        this.durationHours = durationInHours;
+        this.difficultyLevel = difficulty;
+        this.status = status;
     }
 
     public String getTitle() {
@@ -29,14 +39,17 @@ public class CourseDto {
         return instructorName;
     }
 
-    @Override
-public String toString() {
-    return "Course " +
-           "\n  title='" + title + '\'' +
-           ",\n  description='" + description + '\'' +
-           ",\n  instructorName='" + instructorName + '\'' +
-           ",\n  durationHours=" + durationHours +
-           ",\n  difficultyLevel=" + difficultyLevel +
-           "\n\n";
-}
+    public int getDurationInHours() {
+        return durationHours;
+    }
+
+    public DifficultyLevel getDifficulty() {
+        return difficultyLevel;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+
 }

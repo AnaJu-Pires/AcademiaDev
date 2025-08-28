@@ -1,7 +1,10 @@
 package Controller;
 
 
-import Model.Course.DifficultyLevel;
+import java.util.List;
+
+
+import Controller.dto.CourseDto;
 import Service.CourseService;
 
 public class AdminController {
@@ -13,7 +16,11 @@ public class AdminController {
 
 
     
-    public void addCourse(String title, String description, String instructorName, int durationInHours, DifficultyLevel difficulty) {
-        courseService.saveCourse(title, description, instructorName, durationInHours, difficulty);
+    public void addCourse(CourseDto CourseDto){ 
+        courseService.saveCourse(CourseDto);    
+    }
+
+    public List<CourseDto> showCoursesCatalog() {
+        return courseService.showCoursesCatalog();
     }
 }
