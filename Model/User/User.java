@@ -28,11 +28,6 @@ public abstract class User {
         return email;
     }
 
-    public void login(String email) {
-        System.out.println("Logando no sistema");
-        //configurar certinho, se pa é um abstract mas não tenho ctz
-    }
-
     public void showCoursesCatalog(List<Course> courses) {
         System.out.println("Verificando o catálogo de cursos");
         for(Course course : courses) {

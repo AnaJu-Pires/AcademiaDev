@@ -1,5 +1,6 @@
 
 import Controller.AdminController;
+import Controller.UserController;
 import Data.InitialData;
 import Repository.impl.CourseRepositoryImpl;
 import Service.CourseService;
@@ -15,10 +16,12 @@ public class Main {
 
         AdminController adminController = new AdminController(courseService);
 
+        UserController userController = new UserController();
+
         InitialData data = new InitialData();
         data.addData(adminController);
 
-        MainView view = new MainView(adminController);
+        MainView view = new MainView(adminController, userController);
 
         System.out.println("Bem-vindo à AcademiaDev!");
         view.displayMenu();
