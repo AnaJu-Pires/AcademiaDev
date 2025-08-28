@@ -1,10 +1,12 @@
 
+import Data.InitialData;
+
 import Controller.AdminController;
 import Controller.UserController;
-import Data.InitialData;
 import Repository.impl.CourseRepositoryImpl;
+import Repository.impl.StudentRepositoryImpl;
 import Service.CourseService;
-
+import Service.StudentService;
 import View.MainView;
 
 public class Main {
@@ -16,14 +18,18 @@ public class Main {
 
         AdminController adminController = new AdminController(courseService);
 
-        UserController userController = new UserController();
+        StudentRepositoryImpl studentRepository = new StudentRepositoryImpl();
+
+        StudentService studentService = new StudentService(studentRepository);
+
+        UserController userController = new UserController(studentService);
 
         InitialData data = new InitialData();
         data.addData(adminController);
 
         MainView view = new MainView(adminController, userController);
 
-        System.out.println("Bem-vindo à AcademiaDev!");
+        System.out.println("\t----- Welcome to GymDev! -----\n");
         view.displayMenu();
 
     }

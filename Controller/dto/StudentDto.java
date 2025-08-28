@@ -3,20 +3,18 @@ package Controller.dto;
 import java.util.List;
 
 import Model.Enrollment.Enrollment;
-import Model.Policy.SubscriptionPlan;
-
 public class StudentDto extends UserDto {
 
-    private SubscriptionPlan subscriptionPlan;
+    private String subscriptionPlanDto;
     private List<Enrollment> enrollments;
 
-    public StudentDto(String name, String email, SubscriptionPlan subscriptionPlan) {
+    public StudentDto(String name, String email, String subscriptionPlanDto) {
         super(name, email);
-        this.subscriptionPlan = subscriptionPlan;
+        this.subscriptionPlanDto = subscriptionPlanDto;
     }
 
-    public SubscriptionPlan getSubscriptionPlan() {
-        return subscriptionPlan;
+    public String getSubscriptionPlanDto() {
+        return subscriptionPlanDto;
     }
 
 

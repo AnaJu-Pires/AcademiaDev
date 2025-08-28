@@ -1,6 +1,6 @@
 package Controller.dto;
 
-public class UserDto {
+public abstract class UserDto {
 private static Integer nextId = 1;
 
     protected Integer id;

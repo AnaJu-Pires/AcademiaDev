@@ -1,5 +1,6 @@
 package Model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Enrollment.Enrollment;
@@ -14,6 +15,12 @@ public class Student extends User {
         super(name, email);
         this.subscriptionPlan = subscriptionPlan;
         this.enrollments = enrollments;
+    }
+
+    public Student(String name, String email, SubscriptionPlan subscriptionPlan) {
+        super(name, email);
+        this.subscriptionPlan = subscriptionPlan;
+        this.enrollments = new ArrayList<>();
     }
 
     public SubscriptionPlan getSubscriptionPlan() {
