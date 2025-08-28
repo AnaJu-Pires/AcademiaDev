@@ -32,7 +32,10 @@ public class CourseRepositoryImpl implements CourseRepository{
     }
 
     @Override
-    public void deleteCourse(String name) {
-        courses.remove(name);
+    public Course changeStatusCourse(String name) {
+        Course course = courses.get(name);
+        if(course.getStatus() == true) course.setStatus(false);
+        else course.setStatus(true);
+        return course;
     }
 }

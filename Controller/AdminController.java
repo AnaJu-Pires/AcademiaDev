@@ -23,4 +23,13 @@ public class AdminController {
     public List<CourseDto> showCoursesCatalog() {
         return courseService.showCoursesCatalog();
     }
+
+    public CourseDto searchByName(String courseName) {
+        return courseService.searchByName(courseName);
+    }
+
+    public CourseDto changeStatusCourse(String courseName) {
+        return courseService.changeStatusCourse(courseName);
+    }
+
 }

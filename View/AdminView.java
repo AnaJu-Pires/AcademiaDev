@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import Controller.AdminController;
-import Model.Course.Course;
 import Model.Course.DifficultyLevel;
 
 import Controller.dto.CourseDto;
@@ -25,7 +24,7 @@ public class AdminView {
     while(true) {
         System.out.println("1. Adicionar curso");
         System.out.println("2. Remover curso");
-        System.out.println("3. Editar curso");
+       // System.out.println("3. Editar curso");
         System.out.println("4. Ver catalogo de cursos");
         System.out.println("5. Buscar curso");
         System.out.println("6. Atender ticket de suporte");
@@ -62,8 +61,10 @@ public class AdminView {
                 break;
             case 2:
                 System.out.println("What is the course name: ");
-                // String courseName = scanner.next();
-                // adminController.removeCourse(courseName);
+                String courseNameD = scanner.next();
+                CourseDto courseDtoD = adminController.changeStatusCourse(courseNameD);
+
+                System.out.println(courseNameD + " status changed to: " + courseDtoD.getStatus());
                 break;
             case 3:
                 
@@ -85,7 +86,18 @@ public class AdminView {
                     System.out.println("----------------");
                 break;
             case 5:
-                // adminController.showSupportTickets();
+                System.out.println("What is the course name: ");
+                String courseName = scanner.next();
+                CourseDto course = adminController.searchByName(courseName);
+                
+                System.out.print(course.getTitle());
+                System.out.print(" - Description: " + course.getDescription());
+                System.out.print(" - Instructor: " + course.getInstructorName());
+                System.out.print(" - Duration: " + course.getDurationInHours() + " hours");
+                System.out.print(" - Difficulty: " + course.getDifficulty()); 
+                System.out.println(" - Availability: " + course.getStatus());
+
+                
                 break;
             case 6:
                 // adminController.attendSupportTicket();

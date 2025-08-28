@@ -6,8 +6,7 @@ import java.util.stream.Collectors;
 import Controller.dto.CourseDto;
 import Repository.impl.CourseRepositoryImpl;
 import Model.Course.Course;
-import Model.Course.DifficultyLevel;
-
+import java.util.Optional;
 
 
 public class CourseService {
@@ -43,6 +42,32 @@ public class CourseService {
             ))
             .collect(Collectors.toList());
 }
+
+    public CourseDto searchByName(String courseName) {
+        Optional<Course> optionalCourse = courseRepository.searchByName(courseName);
+        if (optionalCourse.isPresent()) {
+            Course course = optionalCourse.get();
+            return new CourseDto(
+                    course.getTitle(),
+                    course.getDescription(),
+                    course.getInstructorName(),
+                    course.getDurationHours(),
+                    course.getDifficultyLevel(),
+                    course.getStatus()
+            );
+        } else {
+            return null;
+        }
+    }
+
+    public CourseDto changeStatusCourse(String courseName) {
+        Course course = courseRepository.changeStatusCourse(courseName);
+
+        CourseDto courseDto = new CourseDto(course.getTitle(), course.getDescription(), course.getInstructorName(), course.getDurationHours(), course.getDifficultyLevel(), course.getStatus());
+        System.out.println("trocou." + course.getStatus());
+        return courseDto;
+        
+    }
 
      
 }

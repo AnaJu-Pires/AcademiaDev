@@ -18,7 +18,7 @@ public interface CourseRepository {
     
     List<Course> searchAll();
     
-    void deleteCourse(String name);
+    Course changeStatusCourse(String name);
 
 
     
