@@ -3,9 +3,6 @@ package View;
 import Controller.CourseController;
 import Controller.StudentController;
 import Controller.dto.StudentDto;
-import Model.Policy.BasicPlan;
-import Model.Policy.SubscriptionPlan;
-import Model.User.Student;
 import Controller.EnrollmentController;
 
 
@@ -27,7 +24,7 @@ public class MainView {
     public void displayMenu() {
         AdminView admin = new AdminView(adminController);
         UserView user = new UserView(userController);
-        StudentView student = new StudentView(enrollmentController);
+        StudentView student = new StudentView(enrollmentController, adminController);
 
 
         while (true) {

@@ -1,16 +1,23 @@
 package View;
 
+import java.util.List;
 import java.util.Scanner;
 
 import Controller.EnrollmentController;
 
 import Controller.dto.StudentDto;
+import Controller.dto.CourseDto;
+import Controller.dto.EnrollmentDto;
+import Controller.CourseController;
+
 
 public class StudentView {
     private final EnrollmentController enrollmentController;
+    private final CourseController courseController;
 
-    public StudentView(EnrollmentController enrollmentController) {
+    public StudentView(EnrollmentController enrollmentController, CourseController courseController) {
         this.enrollmentController = enrollmentController;
+        this.courseController = courseController;
     }
 
     public void studentMenu(Scanner scanner, StudentDto studentDto) {
@@ -30,10 +37,25 @@ public class StudentView {
                 enrollmentController.enrollInCourse(courseName, studentDto);
                 break;
             case 2:
-                // View enrolled courses
+                List<EnrollmentDto> enrolledCourses = enrollmentController.viewEnrolledCourses(studentDto);
+                System.out.println("\n\n\tEnrolled courses: ");
+                for(EnrollmentDto enrolledCourse : enrolledCourses) {
+                    System.out.println("Name: " + enrolledCourse.getCourseDto().getTitle() + " - Instructor: " + enrolledCourse.getCourseDto().getInstructorName() + " - Progress: " + enrolledCourse.getProgressDto() + "%");
+                }
+                System.out.println("\n\n");
                 break;
             case 3:
-                // View available courses
+                List<CourseDto> allCourses = courseController.showCoursesCatalog();
+                System.out.println("\n\n\tAll Courses:\n");
+                for(int i = 0; i < allCourses.size(); i++) {
+                    if(allCourses.get(i).getStatus()){
+                    System.out.print((i + 1) + ". " + allCourses.get(i).getTitle());
+                    System.out.print(" - Duration: " + allCourses.get(i).getDurationInHours() + " hours");
+                    System.out.println(" - Difficulty: " + allCourses.get(i).getDifficulty());      
+                    }           
+                }
+                    System.out.println("----------------");
+                System.out.println("\n\n");
                 break;
             case 4:
                 System.out.println("Goodbye! See you next time!");
