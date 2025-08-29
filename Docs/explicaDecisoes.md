@@ -1,6 +1,6 @@
 # Documento de Justificativa de Design - Protótipo AcademiaDev
-Projeto: Protótipo da Plataforma "AcademiaDev"
-Autores: Ana Júlia Pires Oliveira, Gabriel de Souza Costa
+### Projeto: Protótipo da Plataforma "AcademiaDev"
+### Autores: Ana Júlia Pires Oliveira, Gabriel de Souza Costa
 ---
 
 1. Como o Projeto foi Organizado
