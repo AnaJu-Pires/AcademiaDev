@@ -28,6 +28,7 @@ public abstract class User {
         return email;
     }
 
+    //acho que isso nao é aqui
     public void showCoursesCatalog(List<Course> courses) {
         System.out.println("Verificando o catálogo de cursos");
         for(Course course : courses) {

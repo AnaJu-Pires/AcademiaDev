@@ -3,11 +3,11 @@ package Controller;
 import Controller.dto.StudentDto;
 import Service.StudentService;
 
-public class UserController {
+public class StudentController {
 
     private final StudentService studentService;
 
-    public UserController(StudentService studentService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 

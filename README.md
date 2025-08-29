@@ -58,9 +58,9 @@
 #### UserView
 - Pede nome, email e plano para cadastrar novo aluno
 ### AdminView:
-- Criar novo curso (opcional)
-- Gerenciar Status de Cursos
-- Gerenciar Planos de Alunos
+- Criar novo curso (opcional) ✅
+- Gerenciar Status de Cursos  ✅
+- Gerenciar Planos de Alunos    
 - Atender Tickets de Suporte
 - Gerar Relatórios(submenu para acessar todas as análises)
 *Obs(não fizemos assim, mas o que acha?)*

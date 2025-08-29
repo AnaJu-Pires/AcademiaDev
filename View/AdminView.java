@@ -3,7 +3,7 @@ package View;
 import java.util.List;
 import java.util.Scanner;
 
-import Controller.AdminController;
+import Controller.CourseController;
 import Model.Course.DifficultyLevel;
 
 import Controller.dto.CourseDto;
@@ -13,10 +13,10 @@ import Controller.dto.CourseDto;
 
 
 public class AdminView {
-    private final AdminController adminController;
+    private final CourseController courseController;
 
-    public AdminView(AdminController adminController) {
-        this.adminController = adminController;
+    public AdminView(CourseController courseController) {
+        this.courseController = courseController;
     }
 
     public void showAdminMenu(Scanner scanner) {
@@ -58,12 +58,12 @@ public class AdminView {
 
                 CourseDto courseDto = new CourseDto(CouseName, CouseDescription, CouseInstructorName, CouseDurationInHours, difficultyLevel, true);
 
-                adminController.addCourse(courseDto);
+                courseController.addCourse(courseDto);
                 break;
             case 2:
                 System.out.println("What is the course name: ");
                 String courseNameD = scanner.next();
-                CourseDto courseDtoD = adminController.changeStatusCourse(courseNameD);
+                CourseDto courseDtoD = courseController.changeStatusCourse(courseNameD);
 
                 System.out.println(courseNameD + " status changed to: " + courseDtoD.getStatus());
                 break;
@@ -72,7 +72,8 @@ public class AdminView {
 
                 break;
             case 4:
-                List<CourseDto> courses = adminController.showCoursesCatalog();
+                System.out.print("\033[H\033[2J");
+                List<CourseDto> courses = courseController.showCoursesCatalog();
                 System.out.println("\n\n\tAvailable Courses:\n");
                 for(int i = 0; i < courses.size(); i++) {
                     if(courses.get(i).getStatus() == true){
@@ -84,12 +85,16 @@ public class AdminView {
                     }
                     
                 }
-                    System.out.println("----------------");
+                    //System.out.println("----------------");
+                    System.out.println("\n\n\tPress enter to return:\n");
+                    scanner.nextLine();
+                    
+                    System.out.print("\033[H\033[2J");
                 break;
             case 5:
                 System.out.println("What is the course name: ");
                 String courseName = scanner.next();
-                CourseDto course = adminController.searchByName(courseName);
+                CourseDto course = courseController.searchByName(courseName);
                 
                 System.out.print(course.getTitle());
                 System.out.print(" - Description: " + course.getDescription());
@@ -104,7 +109,7 @@ public class AdminView {
                 // adminController.attendSupportTicket();
                 break;
             case 7:
-                List<CourseDto> allCourses = adminController.showCoursesCatalog();
+                List<CourseDto> allCourses = courseController.showCoursesCatalog();
                 System.out.println("\n\n\tAll Courses:\n");
                 for(int i = 0; i < allCourses.size(); i++) {
                     System.out.print((i + 1) + ". " + allCourses.get(i).getTitle());

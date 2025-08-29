@@ -1,12 +1,13 @@
 package Data;
 
-import Controller.AdminController;
+import Controller.CourseController;
 import Controller.dto.CourseDto;
+
 
 import Model.Course.DifficultyLevel;    
 
 public class InitialData {
-    public  void addData(AdminController adminController){
+    public  void addData(CourseController courseController){
 
         //cursos de academia
         CourseDto pilates = new CourseDto("Pilates", "Descrição do curso de Pilates", "Instructor", 10, DifficultyLevel.BEGINNER, true);
@@ -16,12 +17,14 @@ public class InitialData {
         CourseDto pilates3 = new CourseDto("Pilates3", "Descrição do curso de Pilates", "Instructor", 10, DifficultyLevel.ADVANCED, true);
         CourseDto yoga3 = new CourseDto("Yoga3", "Descrição do curso de Yoga", "Instructor", 10, DifficultyLevel.ADVANCED, false);
 
+
+
         
-        adminController.addCourse(pilates);
-        adminController.addCourse(yoga);
-        adminController.addCourse(pilates2);
-        adminController.addCourse(yoga2);
-        adminController.addCourse(pilates3);
-        adminController.addCourse(yoga3);
+        courseController.addCourse(pilates);
+        courseController.addCourse(yoga);
+        courseController.addCourse(pilates2);
+        courseController.addCourse(yoga2);
+        courseController.addCourse(pilates3);
+        courseController.addCourse(yoga3);
     }
 }

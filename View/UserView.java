@@ -1,16 +1,16 @@
 package View;
 import java.util.Scanner;
 
-import Controller.UserController;
+import Controller.StudentController;
 import Controller.dto.StudentDto;
 
 
 public class UserView {
 
-    private final UserController userController;
+    private final StudentController studentController;
 
-    public UserView(UserController userController) {
-        this.userController = userController;
+    public UserView(StudentController studentController) {
+        this.studentController = studentController;
     }
 
     public void newStudentRegistration(Scanner scanner) {
@@ -40,17 +40,17 @@ public class UserView {
                     chosen = "Premium";
                     break;
                 } else {
-                    System.out.println("❌ Invalid choice.You have to choose a plan. Please enter 1 or 2.");
+                    System.out.println("Invalid choice.You have to choose a plan. Please enter 1 or 2.");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Invalid input. Please enter a number.");
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
 
         System.out.println("\nYou selected the " + chosen + " plan.");
         //fazer try-catch
         StudentDto studentDto = new StudentDto(name, email, chosen);
-        userController.createStudent(studentDto);
+        studentController.createStudent(studentDto);
         
         System.out.println("Press Enter to return to the main menu.");
         scanner.nextLine();

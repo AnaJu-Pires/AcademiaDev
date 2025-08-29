@@ -7,10 +7,10 @@ import java.util.List;
 import Controller.dto.CourseDto;
 import Service.CourseService;
 
-public class AdminController {
+public class CourseController {
     
     private final CourseService courseService;
-    public AdminController(CourseService courseService) {
+    public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
 
