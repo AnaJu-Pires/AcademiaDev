@@ -20,16 +20,12 @@ class Enrollment {
 }
 
 abstract class SubscriptionPlan {
-  # price: Double
-  + setPrice(price: Double)
 }
 
 class BasicPlan extends SubscriptionPlan {
-  + setPrice(price: Double)
 }
 
 class PremiumPlan extends SubscriptionPlan {
-  + setPrice(price: Double)
 }
 
 abstract class User {

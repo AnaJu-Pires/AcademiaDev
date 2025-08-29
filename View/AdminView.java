@@ -19,9 +19,10 @@ public class AdminView {
         this.adminController = adminController;
     }
 
-    public void showAdminMenu() {
-    Scanner scanner = new Scanner(System.in);
+    public void showAdminMenu(Scanner scanner) {
+    System.out.println("\t----- Admin Menu -----\n");
     while(true) {
+        System.out.println("Choose an option:");
         System.out.println("1. Add course");
         System.out.println("2. Change course status");
        // System.out.println("3. Editar curso");
@@ -30,7 +31,7 @@ public class AdminView {
         System.out.println("6. Atender ticket de suporte");
         System.out.println("7. Show all courses(active and inactive)");
         System.out.println("8. Exportar dados para CSV");
-        System.out.println("0. Exit");
+        System.out.println("0. Return to main menu");
 
         // CORREÇÃO 3: Usando o scanner para ler a opção do menu
         int choice = scanner.nextInt();
@@ -117,8 +118,7 @@ public class AdminView {
                 // adminController.exportToCSV();
                 break;
             case 0:
-                System.out.println("Goodbye! See you next time!");
-                scanner.close(); // Feche o scanner aqui, ao sair
+                System.out.println("Returning to main menu...");
                 return;
             default:
                 System.out.println("Invalid choice. Please try again.");

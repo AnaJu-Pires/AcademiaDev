@@ -34,7 +34,7 @@ public class MainView {
                 case 1:
                     break;
                 case 2:
-                    admin.showAdminMenu();
+                    admin.showAdminMenu(this.scanner);
                     break;
                 case 3:
                     user.newStudentRegistration(this.scanner);

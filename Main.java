@@ -29,7 +29,7 @@ public class Main {
 
         MainView view = new MainView(adminController, userController);
 
-        System.out.println("\t----- Welcome to GymDev! -----\n");
+        System.out.println("\t----- Welcome to AcademiaDev! -----\n");
         view.displayMenu();
 
     }

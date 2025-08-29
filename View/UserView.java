@@ -48,9 +48,10 @@ public class UserView {
         }
 
         System.out.println("\nYou selected the " + chosen + " plan.");
-        
+        //fazer try-catch
         StudentDto studentDto = new StudentDto(name, email, chosen);
         userController.createStudent(studentDto);
+        
         System.out.println("Press Enter to return to the main menu.");
         scanner.nextLine();
     }
