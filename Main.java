@@ -37,7 +37,7 @@ public class Main {
         InitialData data = new InitialData();
         data.addData(adminController, studentController, enrollmentController, admController);
 
-        MainView view = new MainView(adminController, studentController, enrollmentController);
+        MainView view = new MainView(adminController, studentController, enrollmentController, admController);
 
         System.out.println("\t----- Welcome to AcademiaDev! -----\n");
         view.displayMenu();

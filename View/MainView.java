@@ -1,8 +1,8 @@
 package View;
 
+import Controller.AdminController;
 import Controller.CourseController;
 import Controller.StudentController;
-import Controller.dto.StudentDto;
 import Controller.EnrollmentController;
 
 
@@ -12,17 +12,19 @@ public class MainView {
     private final CourseController adminController;
     private final StudentController userController;
     private final EnrollmentController enrollmentController;
+     private final AdminController admController;
     private final Scanner scanner;
 
-    public MainView(CourseController adminController, StudentController userController, EnrollmentController enrollmentController) {
+    public MainView(CourseController adminController, StudentController userController, EnrollmentController enrollmentController, AdminController admController) {
         this.adminController = adminController;
         this.userController = userController;
         this.enrollmentController = enrollmentController;
+        this.admController = admController;
         this.scanner = new Scanner(System.in);
     }
 
     public void displayMenu() {
-        AdminView admin = new AdminView(adminController);
+        AdminView admin = new AdminView(adminController, admController);
         UserView user = new UserView(userController);
         StudentView student = new StudentView(enrollmentController, adminController, userController);
 
@@ -38,10 +40,10 @@ public class MainView {
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    student.studentLogin(scanner);
+                    student.studentLogin(this.scanner);
                     break;
                 case 2:
-                    admin.showAdminMenu(this.scanner);
+                    admin.adminLogin(this.scanner);
                     break;
                 case 3:
                     user.newStudentRegistration(this.scanner);

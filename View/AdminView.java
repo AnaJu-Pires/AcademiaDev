@@ -3,9 +3,10 @@ package View;
 import java.util.List;
 import java.util.Scanner;
 
+import Controller.AdminController;
 import Controller.CourseController;
 import Model.Course.DifficultyLevel;
-
+import Controller.dto.AdminDto;
 import Controller.dto.CourseDto;
 
 
@@ -14,12 +15,14 @@ import Controller.dto.CourseDto;
 
 public class AdminView {
     private final CourseController courseController;
+    private final AdminController adminController;
 
-    public AdminView(CourseController courseController) {
+    public AdminView(CourseController courseController, AdminController adminController) {
         this.courseController = courseController;
+        this.adminController = adminController;
     }
 
-    public void showAdminMenu(Scanner scanner) {
+    public void showAdminMenu(Scanner scanner, AdminDto adminDto) {
     System.out.println("\t----- Admin Menu -----\n");
     while(true) {
         System.out.println("Choose an option:");
@@ -130,5 +133,20 @@ public class AdminView {
         }
         // CORREÇÃO 2: Removido o scanner.close() de dentro do loop
     }
+
 }
+
+    public void adminLogin(Scanner scanner) {
+        System.out.println("Enter your email:");
+        String email = scanner.nextLine();
+
+        AdminDto existingAdmin = adminController.loginAdmin(email);
+        if (existingAdmin != null) {
+            System.out.println("\nWelcome back, " + existingAdmin.getName() + "!\n");
+            showAdminMenu(scanner, existingAdmin);
+        } else {
+            System.out.println("\nAdmin with email '" + email + "' not found. Please register first in the main menu.\n");
+            return;
+        }
+    }
 }

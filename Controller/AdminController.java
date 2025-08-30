@@ -14,6 +14,12 @@ public class AdminController {
         adminService.addAdmin(adminDto);
     }
 
+    public AdminDto loginAdmin(String email) {
+        return adminService.loginAdmin(email);
+    }
+
+    
+
 
     
 }

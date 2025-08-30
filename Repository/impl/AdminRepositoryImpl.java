@@ -14,5 +14,10 @@ public class AdminRepositoryImpl implements AdminRepository {
         admins.put(admin.getEmail(), admin);
         System.out.println("Admin saved.");
     }
+
+    @Override
+    public Admin findByEmail(String email) {
+        return admins.get(email);
+    }
     
 }

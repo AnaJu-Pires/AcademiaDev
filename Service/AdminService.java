@@ -16,5 +16,13 @@ public class AdminService {
         Admin admin = new Admin(adminDto.getName(), adminDto.getEmail());
         adminRepositoryImpl.addAdmin(admin);
     }
+
+    public AdminDto loginAdmin(String email) {
+        Admin admin = adminRepositoryImpl.findByEmail(email);
+        if (admin != null) {
+            return new AdminDto(admin.getName(), admin.getEmail());
+        }
+        return null;
+    }
     
 }
