@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import Controller.EnrollmentController;
-
+import Controller.StudentController;
 import Controller.dto.StudentDto;
 import Controller.dto.CourseDto;
 import Controller.dto.EnrollmentDto;
@@ -14,10 +14,12 @@ import Controller.CourseController;
 public class StudentView {
     private final EnrollmentController enrollmentController;
     private final CourseController courseController;
+    private final StudentController studentController;
 
-    public StudentView(EnrollmentController enrollmentController, CourseController courseController) {
+    public StudentView(EnrollmentController enrollmentController, CourseController courseController, StudentController studentController) {
         this.enrollmentController = enrollmentController;
         this.courseController = courseController;
+        this.studentController = studentController;
     }
 
     public void studentMenu(Scanner scanner, StudentDto studentDto) {
@@ -65,6 +67,22 @@ public class StudentView {
                 System.out.println("Invalid choice. Please try again.");
         }
     }
+
+    }
+
+    public void studentLogin(Scanner scanner) {
+        System.out.println("Enter your email:");
+        String email = scanner.nextLine();
+
+        StudentDto existingStudent = studentController.loginStudent(email);
+        if (existingStudent != null) {
+            System.out.println("\nWelcome back, " + existingStudent.getName() + "!\n");
+            studentMenu(scanner, existingStudent);
+        } else {
+            System.out.println("\nStudent with email '" + email + "' not found. Please register first in the main menu.\n");
+            return;
+        }
+
     }
     
 }

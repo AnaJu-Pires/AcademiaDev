@@ -24,11 +24,10 @@ public class MainView {
     public void displayMenu() {
         AdminView admin = new AdminView(adminController);
         UserView user = new UserView(userController);
-        StudentView student = new StudentView(enrollmentController, adminController);
+        StudentView student = new StudentView(enrollmentController, adminController, userController);
 
 
         while (true) {
-            StudentDto studentDto = new StudentDto("John Doe", "john@example.com", "Basic"); //isso a gente vai pegar no login
             System.out.println("Choose an option:");
             System.out.println("1. Student Menu");
             System.out.println("2. Admin Menu");
@@ -39,7 +38,7 @@ public class MainView {
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    student.studentMenu(this.scanner, studentDto);
+                    student.studentLogin(scanner);
                     break;
                 case 2:
                     admin.showAdminMenu(this.scanner);

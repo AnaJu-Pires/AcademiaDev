@@ -15,5 +15,9 @@ public class StudentController {
         studentService.createStudent(studentDto);
     }
 
+    public StudentDto loginStudent(String email) {
+        return studentService.loginStudent(email);
+    }
+
     
 }

@@ -13,6 +13,10 @@ private static Integer nextId = 1;
         this.email = email;
     }
 
+    public UserDto(String email) {
+        this(null, email);
+    }
+
     public Integer getId() {
         return id;
     }

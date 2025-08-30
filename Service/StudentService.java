@@ -30,5 +30,14 @@ public class StudentService {
         studentRepositoryImpl.saveStudent(student);
     }
 
+    public StudentDto loginStudent(String email) {
+        Student student = studentRepositoryImpl.findByEmail(email);
+        if (student != null) {
+            return new StudentDto(student.getName(), student.getEmail(), student.getSubscriptionPlan().getPlanName());
+            
+        }
+        return null;
+    }
+
     
 }

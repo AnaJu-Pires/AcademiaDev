@@ -16,5 +16,10 @@ public class StudentRepositoryImpl implements StudentRepository {
         System.out.println("Student saved.");
     }
 
+    @Override
+    public Student findByEmail(String email) {
+        return students.get(email);
+    }
+
     
 }

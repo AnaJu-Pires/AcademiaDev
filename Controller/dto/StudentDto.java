@@ -13,6 +13,11 @@ public class StudentDto extends UserDto {
         this.subscriptionPlanDto = subscriptionPlanDto;
     }
 
+    public StudentDto(String email) {
+        super(email);
+        
+    }
+
 
 
     public String getSubscriptionPlanDto() {

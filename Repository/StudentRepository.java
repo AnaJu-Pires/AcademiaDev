@@ -8,7 +8,9 @@ public interface StudentRepository {
 
     TreeSet<Student> students = new TreeSet<>();
 
-    void saveStudent(Student student); 
+    void saveStudent(Student student);
+
+    Student findByEmail(String email);
         
 
     
