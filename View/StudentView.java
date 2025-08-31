@@ -29,7 +29,10 @@ public class StudentView {
         System.out.println("1. Enroll in a course");
         System.out.println("2. View enrolled courses");
         System.out.println("3. View available courses");
-        System.out.println("4. Exit");
+        System.out.println("4. Update progress");
+        System.out.println("5. Cancel enrollment");
+        System.out.println("6. Open support ticket");
+        System.out.println("7. Exit");
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
@@ -59,7 +62,28 @@ public class StudentView {
                     System.out.println("----------------");
                 System.out.println("\n\n");
                 break;
+
             case 4:
+                System.out.print("Enter the course name to update your progress: ");
+                String courseNameToUpdate = scanner.nextLine();
+                int currentProgress = enrollmentController.getCourseProgress(studentDto, courseNameToUpdate);
+                if (currentProgress == -1) {
+                    break;
+                } else if (currentProgress == 100) {
+                    System.out.println("You have already completed this course.");
+                    break;
+                }
+                System.out.println("Your current progress: " + currentProgress + "%");
+                System.out.print("Enter the new progress: ");
+                int newProgress = scanner.nextInt();
+                scanner.nextLine();
+                if (newProgress < 0 || newProgress > 100) {
+                    System.out.println("Update failed. Progress must be a value between 0 and 100.");
+                    break;
+                }
+                enrollmentController.updateProgress(studentDto, courseNameToUpdate, newProgress);
+                break;
+            case 7:
                 System.out.println("Goodbye! See you next time!");
                 scanner.close();
                 return;

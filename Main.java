@@ -26,7 +26,7 @@ public class Main {
         StudentController studentController = new StudentController(studentService);
 
         EnrollmentRepositoryImpl enrollmentRepository = new EnrollmentRepositoryImpl();
-        EnrollmentService enrollmentService = new EnrollmentService(enrollmentRepository, myRepository);
+        EnrollmentService enrollmentService = new EnrollmentService(enrollmentRepository, myRepository, enrollmentRepository);
         EnrollmentController enrollmentController = new EnrollmentController(enrollmentService);
 
         AdminRepositoryImpl adminRepository = new AdminRepositoryImpl();

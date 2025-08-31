@@ -50,13 +50,13 @@
 
 ## Views e suas Funcionalidade
 - MainView(menu principal e lógica de login)
-- StudentView(menu do estudante)
+- StudentView(menu do estudante) 
 - AdminView(menu do administrador)
 - UserView(cadastro de novo estudante)
 ### MainView:
-- Gerencia as outras Views
+- Gerencia as outras Views ✅
 #### UserView
-- Pede nome, email e plano para cadastrar novo aluno
+- Pede nome, email e plano para cadastrar novo aluno ✅
 ### AdminView:
 - Criar novo curso (opcional) ✅
 - Gerenciar Status de Cursos  ✅
@@ -66,8 +66,8 @@
 *Obs(não fizemos assim, mas o que acha?)*
 - Exportar Dados CSV
 ### StudentView:
-- Matricular-se em Curso
-- Consultar Minhas Matrículas (listar os cursos em que está ou foi matriculado, o progresso em cada um e seu status)
+- Matricular-se em Curso ✅
+- Consultar Minhas Matrículas (listar os cursos em que está ou foi matriculado, o progresso em cada um e seu status) ✅
 - Atualizar Progresso
 - Cancelar Matrícula(status FALSE)
 ## Operações Gerais(Admin e Student):

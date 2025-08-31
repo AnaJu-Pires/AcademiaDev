@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
+import Repository.EnrollmentRepository;
 import Repository.impl.CourseRepositoryImpl;
 import Repository.impl.EnrollmentRepositoryImpl;
 
 import Model.Course.Course;
 import Controller.dto.StudentDto;
+import Exception.BusinessException;
+import Exception.CourseNotFoundException;
+import Exception.EnrollmentNotFoundException;
 import Model.Enrollment.Enrollment;
 import Controller.dto.CourseDto;
 import Controller.dto.EnrollmentDto;
@@ -20,11 +24,13 @@ import Model.Policy.PremiumPlan;
 
 public class EnrollmentService {
     private final EnrollmentRepositoryImpl enrollmentRepositoryImpl;
+    private final EnrollmentRepository enrollmentRepository;
     private final CourseRepositoryImpl courseRepository;
 
-    public EnrollmentService(EnrollmentRepositoryImpl enrollmentRepositoryImpl, CourseRepositoryImpl courseRepository) {
+    public EnrollmentService(EnrollmentRepositoryImpl enrollmentRepositoryImpl, CourseRepositoryImpl courseRepository, EnrollmentRepository enrollmentRepository) {
         this.enrollmentRepositoryImpl = enrollmentRepositoryImpl;
         this.courseRepository = courseRepository;
+        this.enrollmentRepository = enrollmentRepository;
     }
     
 
@@ -69,7 +75,36 @@ public class EnrollmentService {
                     enrolledCourses.add(new EnrollmentDto(enrollment.getId(), studentDto, courseDto, enrollment.getProgress()));
                 }
             }
-            //String title, String description, String instructorName, int durationHours, DifficultyLevel difficultyLevel, Boolean status
+
             return enrolledCourses;
         }
+
+        public int getCourseProgress(StudentDto studentDto, String courseName) {
+            courseRepository.searchByName(courseName)
+                .orElseThrow(() -> new CourseNotFoundException("The course '" + courseName + "' does not exist."));
+
+            Enrollment enrollment = enrollmentRepository.findByStudentEmailAndCourseName(studentDto.getEmail(), courseName);
+            if (enrollment == null) {
+                throw new EnrollmentNotFoundException("You are not enrolled in the course '" + courseName + "'.");
+            }
+            return enrollment.getProgress();
+        }
+
+        public void updateProgress(StudentDto studentDto, String courseName, int newProgress) {
+            courseRepository.searchByName(courseName)
+                    .orElseThrow(() -> new CourseNotFoundException("The course '" + courseName + "' does not exist."));
+
+            Enrollment enrollment = enrollmentRepository.findByStudentEmailAndCourseName(studentDto.getEmail(), courseName);
+            if (enrollment == null) {
+                throw new EnrollmentNotFoundException("You are not enrolled in the course '" + courseName + "'.");
+            }
+
+            if (newProgress <= enrollment.getProgress()) {
+                throw new BusinessException("The new progress (" + newProgress + "%) must be greater than the current progress (" + enrollment.getProgress() + "%).");
+            }
+            enrollment.setProgress(newProgress);
+        }
+
+
+    
 }

@@ -19,4 +19,17 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
     public Map<Integer, Enrollment> getEnrollments() {  //teste para a matricula, depois ve se mantem
         return this.enrollments;
     }
+
+
+    @Override
+    public Enrollment findByStudentEmailAndCourseName(String studentEmail, String courseName) {
+    for (Enrollment enrollment : enrollments.values()) {
+        if (enrollment.getStudent().getEmail().equals(studentEmail)
+                && enrollment.getCourse().getTitle().equals(courseName)) {
+            return enrollment;
+        }
+    }
+    return null;
+    }
+
 }
