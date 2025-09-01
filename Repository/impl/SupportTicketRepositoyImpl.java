@@ -3,6 +3,8 @@ package Repository.impl;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Optional;
+import java.util.List;
+import java.util.ArrayList;
 
 import Model.Support.SupportTicket;
 import Repository.SupportTicketRepositoy;
@@ -24,5 +26,12 @@ public class SupportTicketRepositoyImpl implements SupportTicketRepositoy {
     @Override
     public Optional<SupportTicket> resolveTicket() {
         return Optional.ofNullable(supportTickets.poll());
+    }
+
+    @Override
+    public List<SupportTicket> exportAllSupportTickets() {
+        List<SupportTicket> supportTickets = new ArrayList<>(this.supportTickets.size());
+        supportTickets.addAll(this.supportTickets);
+        return supportTickets;
     }
 }

@@ -18,6 +18,7 @@ import Exception.EnrollmentNotFoundException;
 import Model.Enrollment.Enrollment;
 import Controller.dto.CourseDto;
 import Controller.dto.EnrollmentDto;
+import Util.GenericCsvExporter;
 
 import Model.User.Student;
 import Model.Policy.PremiumPlan;
@@ -103,6 +104,13 @@ public class EnrollmentService {
                 throw new BusinessException("The new progress (" + newProgress + "%) must be greater than the current progress (" + enrollment.getProgress() + "%).");
             }
             enrollment.setProgress(newProgress);
+        }
+
+        public void exportAllEnrollments(List<String> fieldsToInclude) {
+            List<Enrollment> enrollments = enrollmentRepository.exportAEnrollments();
+
+            String csv = GenericCsvExporter.export(enrollments, fieldsToInclude);
+            System.out.println(csv);
         }
 
 

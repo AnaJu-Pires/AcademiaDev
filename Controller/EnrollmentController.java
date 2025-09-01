@@ -44,6 +44,10 @@ public class EnrollmentController {
         }
     }
 
+    public void exportAllEnrollments(List<String> fieldsToInclude) {
+        this.enrollmentService.exportAllEnrollments(fieldsToInclude);
+    }
+
 
     
 }

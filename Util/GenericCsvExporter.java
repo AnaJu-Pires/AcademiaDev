@@ -16,11 +16,11 @@ public class GenericCsvExporter {
             Class<?> clazz = data.get(0).getClass();
             StringBuilder csvBuilder = new StringBuilder();
 
-            // --- Cabeçalho ---
+
             String header = String.join(",", fieldsToInclude);
             csvBuilder.append(header).append("\n");
 
-            // --- Linhas ---
+
             for (T item : data) {
                 String row = fieldsToInclude.stream()
                         .map(fieldName -> {
@@ -30,7 +30,7 @@ public class GenericCsvExporter {
                                 Object value = field.get(item);
                                 return value != null ? value.toString() : "";
                             } catch (NoSuchFieldException | IllegalAccessException e) {
-                                return ""; // ignora campos inválidos
+                                return "";
                             }
                         })
                         .collect(Collectors.joining(","));

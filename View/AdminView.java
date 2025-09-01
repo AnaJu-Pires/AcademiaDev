@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import Controller.AdminController;
 import Controller.CourseController;
+import Controller.EnrollmentController;
 import Controller.SupportTicketController;
 import Model.Course.DifficultyLevel;
 import Controller.dto.AdminDto;
@@ -21,11 +22,13 @@ public class AdminView {
     private final CourseController courseController;
     private final AdminController adminController;
     private final SupportTicketController supportTicketController;
+    private final EnrollmentController enrollmentController;
 
-    public AdminView(CourseController courseController, AdminController adminController, SupportTicketController supportTicketController) {
+    public AdminView(CourseController courseController, AdminController adminController, SupportTicketController supportTicketController, EnrollmentController enrollmentController) {
         this.courseController = courseController;
         this.adminController = adminController;
         this.supportTicketController = supportTicketController;
+        this.enrollmentController = enrollmentController;
     }
 
     public void showAdminMenu(Scanner scanner, AdminDto adminDto) {
@@ -165,11 +168,12 @@ public class AdminView {
                 System.out.println("3. Users");
                 System.out.println("4. Support Tickets");
                 int option = scanner.nextInt(); 
+                int choose = 0;
+                List<String> fieldsToInclude = new ArrayList<>();
 
                 switch (option) {
                     case 1:
-                        int choose = 0;
-                        List<String> fieldsToInclude = new ArrayList<>();
+                        
 
                         while (true) {
                             System.out.println("Choose the fields to include:");
@@ -180,7 +184,7 @@ public class AdminView {
                             System.out.println("5. Difficulty");
                             System.out.println("6. Status");
                             System.out.println("7. Submit");
-                            System.out.print("8. Exit: 0\n");
+                            System.out.print("8. Exit:\n");
                             
                             choose = scanner.nextInt(); 
                             scanner.nextLine();
@@ -191,20 +195,89 @@ public class AdminView {
                             } else if (choose == 3) {
                                 fieldsToInclude.add("instructorName");
                             } else if (choose == 4) {
-                                fieldsToInclude.add("durationInHours");
+                                fieldsToInclude.add("durationHours");
                             } else if (choose == 5) {
-                                fieldsToInclude.add("difficulty");
+                                fieldsToInclude.add("difficultyLevel");
                             } else if (choose == 6) {
                                 fieldsToInclude.add("status");
                             } else if (choose == 7) {
                                 courseController.exportAllCourses(fieldsToInclude);
+                                break;
                             }else if(choose == 8){
                                 break;
                             }
                         }
 
                         break;
-                
+                        case 2:
+                            while(true){
+                                System.out.println("Choose the fields to include:");
+                                System.out.println("1. id");
+                                System.out.println("2. Student");
+                                System.out.println("3. Course");
+                                System.out.println("4. Submit");
+                                System.out.print("5. Exit:\n");
+                                choose = scanner.nextInt(); 
+                                scanner.nextLine();
+                                if (choose == 1) {
+                                    fieldsToInclude.add("id");
+                                } else if (choose == 2) {
+                                    fieldsToInclude.add("student");
+                                } else if (choose == 3) {
+                                    fieldsToInclude.add("course");
+                                } else if (choose == 4) {
+                                    enrollmentController.exportAllEnrollments(fieldsToInclude);
+                                    break;
+                                }else if(choose == 5){
+                                    break;
+                                }
+                            }
+                        break;
+                        case 3:
+                                while(true){
+                                    System.out.println("Choose the fields to include:");
+                                    System.out.println("1. Name");
+                                    System.out.println("2. Email");
+                                    System.out.println("3. Submit");
+                                    System.out.print("4. Exit:\n");
+                                    choose = scanner.nextInt(); 
+                                    scanner.nextLine();
+                                    if (choose == 1) {
+                                        fieldsToInclude.add("name");
+                                    } else if (choose == 2) {
+                                        fieldsToInclude.add("email");
+                                    } else if (choose == 3) {
+                                        //userController.exportAllUsers(fieldsToInclude);
+                                        break;
+                                    }else if(choose == 4){
+                                        break;
+                                    }
+                                }
+                        break;
+                        case 4:
+                            while(true){
+                                System.out.println("Choose the fields to include:");
+                                System.out.println("1. title");
+                                System.out.println("2. message");
+                                System.out.println("3. author");
+                                System.out.println("4. submit");
+                                System.out.print("5. Exit:\n");
+                                choose = scanner.nextInt(); 
+                                scanner.nextLine();
+                                if (choose == 1) {
+                                    fieldsToInclude.add("title");
+                                } else if (choose == 2) {
+                                    fieldsToInclude.add("message");
+                                } else if (choose == 3) {
+                                    fieldsToInclude.add("author");
+                                } else if (choose == 4) {
+                                    supportTicketController.exportAllSupportTickets(fieldsToInclude);
+                                    break;
+                                }else if(choose == 5){
+                                    break;
+                                }
+                            }
+                        break;
                     default:
                         break;
                 }

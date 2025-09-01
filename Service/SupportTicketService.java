@@ -1,6 +1,7 @@
 package Service;
 
 import java.util.Optional;
+import java.util.List;
 
 import Controller.dto.AdminDto;
 import Controller.dto.StudentDto;
@@ -10,6 +11,7 @@ import Repository.SupportTicketRepositoy;
 import Model.Support.SupportTicket;
 import Model.User.Admin;
 import Model.User.Student;
+import Util.GenericCsvExporter;
 
 public class SupportTicketService {
     
@@ -67,6 +69,13 @@ public class SupportTicketService {
             }
             return dto;
         });
+    }
+
+    public void exportAllSupportTickets(List<String> fieldsToInclude) {
+        List<SupportTicket> supportTickets = supportTicketRepositoy.exportAllSupportTickets();
+        String csv = GenericCsvExporter.export(supportTickets, fieldsToInclude);
+        System.out.println(csv);
+        
     }
 
     

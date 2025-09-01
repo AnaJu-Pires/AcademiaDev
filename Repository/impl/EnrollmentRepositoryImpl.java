@@ -3,6 +3,9 @@ package Repository.impl;
 import Model.Enrollment.Enrollment;
 import Repository.EnrollmentRepository;
 
+import java.util.stream.Collectors;
+
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -30,6 +33,11 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
         }
     }
     return null;
+    }
+
+    @Override
+    public List<Enrollment> exportAEnrollments() {
+        return this.enrollments.values().stream().collect(Collectors.toList());
     }
 
 }

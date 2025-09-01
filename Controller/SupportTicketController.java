@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.Optional;
+import java.util.List;
 
 import Controller.dto.SupportTicketDto;
 import Exception.BusinessException;
@@ -27,5 +28,9 @@ public class SupportTicketController {
 
     public Optional<SupportTicketDto> resolveNextTicket() {
         return supportTicketService.resolveNextTicketInQueue();
+    }
+
+    public void exportAllSupportTickets(List<String> fieldsToInclude) {
+        supportTicketService.exportAllSupportTickets(fieldsToInclude);
     }
 }

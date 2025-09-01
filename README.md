@@ -69,7 +69,7 @@
 - Matricular-se em Curso ✅
 - Consultar Minhas Matrículas (listar os cursos em que está ou foi matriculado, o progresso em cada um e seu status) ✅
 - Atualizar Progresso ✅
-- Cancelar Matrícula(status FALSE)
+- Cancelar Matrícula(apagar)
 ## Operações Gerais(Admin e Student):
 - Catálogo de Cursos ✅
 - Abrir Ticket de Suporte 

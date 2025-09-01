@@ -2,6 +2,7 @@ package Repository;
 
 import Model.Enrollment.Enrollment;
 
+import java.util.List;
 import java.util.Map;
 
 public interface EnrollmentRepository {
@@ -10,4 +11,6 @@ public interface EnrollmentRepository {
     Map<Integer, Enrollment> getEnrollments();
 
     Enrollment findByStudentEmailAndCourseName(String studentEmail, String courseName);
+
+    List<Enrollment> exportAEnrollments();
 }
