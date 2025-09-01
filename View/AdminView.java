@@ -3,6 +3,7 @@ package View;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import Controller.AdminController;
 import Controller.CourseController;
@@ -158,7 +159,59 @@ public class AdminView {
                     System.out.println("----------------");
                 break;
             case 8:
-                // adminController.exportToCSV();
+                System.out.println("Choose one to export:");
+                System.out.println("1. All Courses");
+                System.out.println("2. Enrolled Courses");
+                System.out.println("3. Users");
+                System.out.println("4. Support Tickets");
+                int option = scanner.nextInt(); 
+
+                switch (option) {
+                    case 1:
+                        int choose = 0;
+                        List<String> fieldsToInclude = new ArrayList<>();
+
+                        while (true) {
+                            System.out.println("Choose the fields to include:");
+                            System.out.println("1. Title");
+                            System.out.println("2. Description");
+                            System.out.println("3. Instructor");
+                            System.out.println("4. Duration");
+                            System.out.println("5. Difficulty");
+                            System.out.println("6. Status");
+                            System.out.println("7. Submit");
+                            System.out.print("8. Exit: 0\n");
+                            
+                            choose = scanner.nextInt(); 
+                            scanner.nextLine();
+                            if (choose == 1) {
+                                fieldsToInclude.add("title");
+                            } else if (choose == 2) {
+                                fieldsToInclude.add("description");
+                            } else if (choose == 3) {
+                                fieldsToInclude.add("instructorName");
+                            } else if (choose == 4) {
+                                fieldsToInclude.add("durationInHours");
+                            } else if (choose == 5) {
+                                fieldsToInclude.add("difficulty");
+                            } else if (choose == 6) {
+                                fieldsToInclude.add("status");
+                            } else if (choose == 7) {
+                                courseController.exportAllCourses(fieldsToInclude);
+                            }else if(choose == 8){
+                                break;
+                            }
+                        }
+
+                        break;
+                
+                    default:
+                        break;
+                }
+                
+                
+                
+                
                 break;
             case 0:
                 System.out.println("Returning to main menu...");

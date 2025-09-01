@@ -1,10 +1,12 @@
 package Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import Controller.dto.CourseDto;
 import Repository.impl.CourseRepositoryImpl;
+import Util.GenericCsvExporter;
 import Model.Course.Course;
 import java.util.Optional;
 
@@ -67,6 +69,13 @@ public class CourseService {
         System.out.println("trocou." + course.getStatus());
         return courseDto;
         
+    }
+
+    public void exportAllCourses(List<String> fieldsToInclude) {
+        
+        List<Course> courses = courseRepository.exportAllCourses();
+        String csv = GenericCsvExporter.export(courses, fieldsToInclude);
+        System.out.println(csv);
     }
 
      

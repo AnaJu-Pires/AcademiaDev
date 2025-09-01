@@ -20,6 +20,6 @@ public interface CourseRepository {
     
     Course changeStatusCourse(String name);
 
-
+    List<Course> exportAllCourses();
     
 }

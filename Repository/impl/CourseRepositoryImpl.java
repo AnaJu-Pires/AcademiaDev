@@ -38,4 +38,9 @@ public class CourseRepositoryImpl implements CourseRepository{
         else course.setStatus(true);
         return course;
     }
+
+    @Override
+    public List<Course> exportAllCourses() {
+        return courses.values().stream().collect(Collectors.toList());
+    }
 }

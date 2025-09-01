@@ -32,4 +32,8 @@ public class CourseController {
         return courseService.changeStatusCourse(courseName);
     }
 
+    public void exportAllCourses(List<String> fieldsToInclude) {
+        courseService.exportAllCourses(fieldsToInclude);
+    }
+
 }
