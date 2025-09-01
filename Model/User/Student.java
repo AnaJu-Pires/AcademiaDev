@@ -13,7 +13,10 @@ public class Student extends User {
         this.subscriptionPlan = subscriptionPlan;
 
     }
-
+    
+    public Student(String name, String email) {
+        super(name, email);
+    }
     
    
 

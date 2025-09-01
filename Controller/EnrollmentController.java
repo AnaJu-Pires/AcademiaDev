@@ -6,7 +6,6 @@ import Controller.dto.StudentDto;
 import Exception.BusinessException;
 import Exception.CourseNotFoundException;
 import Exception.EnrollmentNotFoundException;
-import Model.Enrollment.Enrollment;
 import Service.EnrollmentService;
 import Controller.dto.EnrollmentDto;
 

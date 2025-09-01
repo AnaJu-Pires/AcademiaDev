@@ -3,6 +3,7 @@ import Data.InitialData;
 import Controller.AdminController;
 import Controller.CourseController;
 import Controller.StudentController;
+import Repository.SupportTicketRepositoy;
 import Repository.impl.AdminRepositoryImpl;
 import Repository.impl.CourseRepositoryImpl;
 import Repository.impl.EnrollmentRepositoryImpl;
@@ -11,7 +12,12 @@ import Service.AdminService;
 import Service.CourseService;
 import Service.EnrollmentService;
 import Service.StudentService;
+import Service.SupportTicketService;
 import View.MainView;
+import Repository.SupportTicketRepositoy;
+import Repository.impl.SupportTicketRepositoyImpl;
+import Controller.SupportTicketController;
+
 
 import Controller.EnrollmentController;
 public class Main {
@@ -33,11 +39,15 @@ public class Main {
         AdminService adminService = new AdminService(adminRepository);
         AdminController admController = new AdminController(adminService);
 
+        SupportTicketRepositoy supportTicketRepository = new SupportTicketRepositoyImpl();
+        SupportTicketService supportTicketService = new SupportTicketService(supportTicketRepository);
+        SupportTicketController supportTicketController = new SupportTicketController(supportTicketService);
+
 
         InitialData data = new InitialData();
         data.addData(adminController, studentController, enrollmentController, admController);
 
-        MainView view = new MainView(adminController, studentController, enrollmentController, admController);
+        MainView view = new MainView(adminController, studentController, enrollmentController, admController, supportTicketController);
 
         System.out.println("\t----- Welcome to AcademiaDev! -----\n");
         view.displayMenu();

@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 import Controller.EnrollmentController;
 import Controller.StudentController;
+import Controller.SupportTicketController;
 import Controller.dto.StudentDto;
+import Controller.dto.SupportTicketDto;
 import Controller.dto.CourseDto;
 import Controller.dto.EnrollmentDto;
 import Controller.CourseController;
@@ -15,11 +17,13 @@ public class StudentView {
     private final EnrollmentController enrollmentController;
     private final CourseController courseController;
     private final StudentController studentController;
+    private final SupportTicketController supportTicketController;
 
-    public StudentView(EnrollmentController enrollmentController, CourseController courseController, StudentController studentController) {
+    public StudentView(EnrollmentController enrollmentController, CourseController courseController, StudentController studentController, SupportTicketController supportTicketController) {
         this.enrollmentController = enrollmentController;
         this.courseController = courseController;
         this.studentController = studentController;
+        this.supportTicketController = supportTicketController;
     }
 
     public void studentMenu(Scanner scanner, StudentDto studentDto) {
@@ -82,6 +86,17 @@ public class StudentView {
                     break;
                 }
                 enrollmentController.updateProgress(studentDto, courseNameToUpdate, newProgress);
+                break;
+            case 6:
+                SupportTicketDto supportTicketDto = new SupportTicketDto();
+                System.out.println("What is the title of your support ticket?");
+                supportTicketDto.setTitle(scanner.nextLine());
+                System.out.println("What is your message?");
+                supportTicketDto.setMessage(scanner.nextLine());
+                supportTicketDto.setAuthor(studentDto);
+                
+                supportTicketController.saveSupportTicket(supportTicketDto);
+                
                 break;
             case 7:
                 System.out.println("Goodbye! See you next time!");

@@ -68,11 +68,11 @@
 ### StudentView:
 - Matricular-se em Curso ✅
 - Consultar Minhas Matrículas (listar os cursos em que está ou foi matriculado, o progresso em cada um e seu status) ✅
-- Atualizar Progresso
+- Atualizar Progresso ✅
 - Cancelar Matrícula(status FALSE)
 ## Operações Gerais(Admin e Student):
-- Catálogo de Cursos
-- Abrir Ticket de Suporte
+- Catálogo de Cursos ✅
+- Abrir Ticket de Suporte 
 *Obs(vamos fazer cada um no seu controller ou criar um pra isso)*
 
 ## Relatórios e Análises

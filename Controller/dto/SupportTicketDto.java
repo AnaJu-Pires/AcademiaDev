@@ -1,25 +1,26 @@
-package Model.Support;
+package Controller.dto;
 
-import Model.User.User;
 
-public class SupportTicket {
 
+
+public class SupportTicketDto {
+    private Integer id;
     private String title;
     private String message;
-    private User author;
+    private UserDto author;
 
-
-    public SupportTicket(String title, String message, User author) {
+    public SupportTicketDto(Integer id, String title, String message, UserDto author) {
+        this.id = id;
         this.title = title;
         this.message = message;
         this.author = author;
     }
 
-    public SupportTicket() {
+    public SupportTicketDto() {}
 
+    public Integer getId() {
+        return id;
     }
-
-
 
     public String getTitle() {
         return title;
@@ -29,8 +30,12 @@ public class SupportTicket {
         return message;
     }
 
-    public User getAuthor() {
+    public UserDto getAuthor() {
         return author;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {
@@ -41,9 +46,11 @@ public class SupportTicket {
         this.message = message;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserDto author) {
         this.author = author;
     }
+
+
 
     
 }

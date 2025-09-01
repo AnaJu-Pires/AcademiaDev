@@ -3,6 +3,7 @@ package View;
 import Controller.AdminController;
 import Controller.CourseController;
 import Controller.StudentController;
+import Controller.SupportTicketController;
 import Controller.EnrollmentController;
 
 
@@ -12,21 +13,23 @@ public class MainView {
     private final CourseController adminController;
     private final StudentController userController;
     private final EnrollmentController enrollmentController;
-     private final AdminController admController;
+    private final AdminController admController;
+    private final SupportTicketController supportTicketController;
     private final Scanner scanner;
 
-    public MainView(CourseController adminController, StudentController userController, EnrollmentController enrollmentController, AdminController admController) {
+    public MainView(CourseController adminController, StudentController userController, EnrollmentController enrollmentController, AdminController admController, SupportTicketController supportTicketController) {
         this.adminController = adminController;
         this.userController = userController;
         this.enrollmentController = enrollmentController;
         this.admController = admController;
+        this.supportTicketController = supportTicketController;
         this.scanner = new Scanner(System.in);
     }
 
     public void displayMenu() {
         AdminView admin = new AdminView(adminController, admController);
         UserView user = new UserView(userController);
-        StudentView student = new StudentView(enrollmentController, adminController, userController);
+        StudentView student = new StudentView(enrollmentController, adminController, userController, supportTicketController);
 
 
         while (true) {
