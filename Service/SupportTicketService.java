@@ -1,11 +1,13 @@
 package Service;
 
+import java.util.Optional;
+
+import Controller.dto.AdminDto;
 import Controller.dto.StudentDto;
 import Controller.dto.SupportTicketDto;
 import Exception.BusinessException;
 import Repository.SupportTicketRepositoy;
 import Model.Support.SupportTicket;
-import Model.User.User;
 import Model.User.Admin;
 import Model.User.Student;
 
@@ -33,6 +35,38 @@ public class SupportTicketService {
         
         supportTicketRepositoy.saveSupportTicket(modelSupportTicket);
 
+    }
+
+    public Optional<SupportTicketDto> findNextTicketInQueue() {
+        Optional<SupportTicket> ticketOptional = supportTicketRepositoy.peekTicket();
+
+        return ticketOptional.map(ticket -> {
+            SupportTicketDto dto = new SupportTicketDto();
+            dto.setTitle(ticket.getTitle());
+            dto.setMessage(ticket.getMessage());
+            if (ticket.getAuthor() instanceof Student) {
+                dto.setAuthor(new StudentDto(ticket.getAuthor().getName()));
+            } else {
+                dto.setAuthor(new AdminDto(ticket.getAuthor().getName(), ticket.getAuthor().getEmail()));
+            }
+            return dto;
+        });
+    }
+
+    public Optional<SupportTicketDto> resolveNextTicketInQueue() {
+        Optional<SupportTicket> ticketOptional = supportTicketRepositoy.resolveTicket();
+
+        return ticketOptional.map(ticket -> {
+            SupportTicketDto dto = new SupportTicketDto();;
+            dto.setTitle(ticket.getTitle());
+            dto.setMessage(ticket.getMessage());
+            if (ticket.getAuthor() instanceof Student) {
+                dto.setAuthor(new StudentDto(ticket.getAuthor().getName()));
+            } else {
+                dto.setAuthor(new AdminDto(ticket.getAuthor().getName(), ticket.getAuthor().getEmail()));
+            }
+            return dto;
+        });
     }
 
     

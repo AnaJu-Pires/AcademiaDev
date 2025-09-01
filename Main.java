@@ -14,7 +14,6 @@ import Service.EnrollmentService;
 import Service.StudentService;
 import Service.SupportTicketService;
 import View.MainView;
-import Repository.SupportTicketRepositoy;
 import Repository.impl.SupportTicketRepositoyImpl;
 import Controller.SupportTicketController;
 

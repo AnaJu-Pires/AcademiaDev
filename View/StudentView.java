@@ -36,7 +36,7 @@ public class StudentView {
         System.out.println("4. Update progress");
         System.out.println("5. Cancel enrollment");
         System.out.println("6. Open support ticket");
-        System.out.println("7. Exit");
+        System.out.println("7. Return to main menu");
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
@@ -99,8 +99,7 @@ public class StudentView {
                 
                 break;
             case 7:
-                System.out.println("Goodbye! See you next time!");
-                scanner.close();
+                System.out.println("Returning to main menu...");
                 return;
             default:
                 System.out.println("Invalid choice. Please try again.");

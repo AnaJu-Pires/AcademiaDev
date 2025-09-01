@@ -1,6 +1,9 @@
 package Controller;
 
+import java.util.Optional;
+
 import Controller.dto.SupportTicketDto;
+import Exception.BusinessException;
 import Service.SupportTicketService;
 
 public class SupportTicketController {
@@ -13,8 +16,16 @@ public class SupportTicketController {
     public void saveSupportTicket(SupportTicketDto supportTicket) {
         try {
             supportTicketService.saveSupportTicket(supportTicket);
-        } catch (Exception e) {
+        } catch (BusinessException e) {
             e.printStackTrace();
         }
+    }
+
+    public Optional<SupportTicketDto> getNextTicket() {
+        return supportTicketService.findNextTicketInQueue();
+    }
+
+    public Optional<SupportTicketDto> resolveNextTicket() {
+        return supportTicketService.resolveNextTicketInQueue();
     }
 }

@@ -1,13 +1,16 @@
 package View;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import Controller.AdminController;
 import Controller.CourseController;
+import Controller.SupportTicketController;
 import Model.Course.DifficultyLevel;
 import Controller.dto.AdminDto;
 import Controller.dto.CourseDto;
+import Controller.dto.SupportTicketDto;
 
 
 
@@ -16,10 +19,12 @@ import Controller.dto.CourseDto;
 public class AdminView {
     private final CourseController courseController;
     private final AdminController adminController;
+    private final SupportTicketController supportTicketController;
 
-    public AdminView(CourseController courseController, AdminController adminController) {
+    public AdminView(CourseController courseController, AdminController adminController, SupportTicketController supportTicketController) {
         this.courseController = courseController;
         this.adminController = adminController;
+        this.supportTicketController = supportTicketController;
     }
 
     public void showAdminMenu(Scanner scanner, AdminDto adminDto) {
@@ -28,10 +33,10 @@ public class AdminView {
         System.out.println("Choose an option:");
         System.out.println("1. Add course");
         System.out.println("2. Change course status");
-       // System.out.println("3. Editar curso");
+        System.out.println("3. Open support ticket");
         System.out.println("4. Show courses catalog");
         System.out.println("5. Search course by name");
-        System.out.println("6. Atender ticket de suporte");
+        System.out.println("6. Resolve support ticket");
         System.out.println("7. Show all courses(active and inactive)");
         System.out.println("8. Exportar dados para CSV");
         System.out.println("0. Return to main menu");
@@ -71,8 +76,13 @@ public class AdminView {
                 System.out.println(courseNameD + " status changed to: " + courseDtoD.getStatus());
                 break;
             case 3:
-                
-
+                SupportTicketDto supportTicketDto = new SupportTicketDto();
+                System.out.println("What is the title of your support ticket?");
+                supportTicketDto.setTitle(scanner.nextLine());
+                System.out.println("What is your message?");
+                supportTicketDto.setMessage(scanner.nextLine());
+                supportTicketDto.setAuthor(adminDto);
+                supportTicketController.saveSupportTicket(supportTicketDto);
                 break;
             case 4:
                 System.out.print("\033[H\033[2J");
@@ -105,12 +115,37 @@ public class AdminView {
                 System.out.print(" - Duration: " + course.getDurationInHours() + " hours");
                 System.out.print(" - Difficulty: " + course.getDifficulty()); 
                 System.out.println(" - Availability: " + course.getStatus());
-
-                
                 break;
             case 6:
-                // adminController.attendSupportTicket();
-                break;
+                while (true) {
+                    Optional<SupportTicketDto> nextTicketOptional = supportTicketController.getNextTicket();
+
+                    if (nextTicketOptional.isEmpty()) {
+                        System.out.println("\nFila de suporte vazia. Todos os tickets foram resolvidos!\n");
+                    }
+                    SupportTicketDto ticketToResolve = nextTicketOptional.get();
+                    System.out.println("\n--- Próximo Ticket na Fila ---");
+                    System.out.println("Autor: " + ticketToResolve.getAuthor().getName());
+                    System.out.println("Título: " + ticketToResolve.getTitle());
+                    System.out.println("Mensagem: " + ticketToResolve.getMessage());
+                    System.out.println("-----------------------------\n");
+                    System.out.print("O que deseja fazer? (1 - Resolver e Ver Próximo, 0 - Voltar ao Menu): ");
+                    
+                    int action = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if (action == 1) {
+                        Optional<SupportTicketDto> resolvedTicketOptional = supportTicketController.resolveNextTicket();
+                        if (resolvedTicketOptional.isPresent()) {
+                            System.out.println("\nO Ticket foi resolvido com sucesso!");
+                        } else {
+                            System.out.println("\nOcorreu um erro ao tentar resolver o ticket.");
+                        }
+                    } else {
+                        System.out.println("\nOperação cancelada. Voltando ao menu principal.\n");
+                        break;
+                    }
+                }
             case 7:
                 List<CourseDto> allCourses = courseController.showCoursesCatalog();
                 System.out.println("\n\n\tAll Courses:\n");
@@ -131,7 +166,6 @@ public class AdminView {
             default:
                 System.out.println("Invalid choice. Please try again.");
         }
-        // CORREÇÃO 2: Removido o scanner.close() de dentro do loop
     }
 
 }
