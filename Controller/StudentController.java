@@ -25,5 +25,9 @@ public class StudentController {
         studentService.exportAllStudents(fieldsToInclude);
     }
 
+    public void changeSubscriptionPlan(String email, String planName) {
+        studentService.changeSubscriptionPlan(email, planName);
+    }
+
     
 }

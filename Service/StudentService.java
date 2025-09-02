@@ -47,5 +47,22 @@ public class StudentService {
         System.out.println(csv);
     }
 
+    public void changeSubscriptionPlan(String email, String planName) {
+        Student student = studentRepositoryImpl.findByEmail(email);
+        if (student != null) {
+            SubscriptionPlan plan = null;
+            if (planName.equals("Basic")) {
+                plan = new BasicPlan();
+            } else if (planName.equals("Premium")) {
+                plan = new PremiumPlan();
+            } else {
+                throw new IllegalArgumentException("Plan not found: " + planName);
+            }
+            student.changeSubscriptionPlan(plan);
+            System.out.println("Subscription plan changed successfully!\n\n");
+            
+        }
+    }
+
     
 }

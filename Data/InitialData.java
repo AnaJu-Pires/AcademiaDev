@@ -4,13 +4,15 @@ import Controller.CourseController;
 import Controller.dto.AdminDto;
 import Controller.dto.CourseDto;
 import Controller.dto.StudentDto;
+import Controller.dto.SupportTicketDto;
 import Controller.EnrollmentController;
 import Controller.StudentController;
 import Controller.AdminController;
-import Model.Course.DifficultyLevel;    
+import Controller.SupportTicketController;
+import Model.Course.DifficultyLevel;  
 
 public class InitialData {
-    public  void addData(CourseController courseController, StudentController studentController, EnrollmentController enrollmentController, AdminController AdminController) {
+    public  void addData(CourseController courseController, StudentController studentController, EnrollmentController enrollmentController, AdminController AdminController, SupportTicketController supportTicketController) {
 
         System.out.println("Adding initial data...\n");
 
@@ -65,6 +67,17 @@ public class InitialData {
         enrollmentController.enrollInCourse(course10.getTitle(), student4);
         enrollmentController.enrollInCourse(course1.getTitle(), student5);
         enrollmentController.enrollInCourse(course2.getTitle(), student6);
+
+        
+
+        SupportTicketDto supportTicketDto = new SupportTicketDto("Support issue", "I'm having a problem with my account", adminDto);
+        supportTicketController.saveSupportTicket(supportTicketDto);
+        SupportTicketDto supportTicketDto2 = new SupportTicketDto("Account issue", "I'm having a problem with my account", adminDto2);
+        supportTicketController.saveSupportTicket(supportTicketDto2);
+        
+        SupportTicketDto supportTicketDto3 = new SupportTicketDto("I can't acess my course", "I'm enrolled in a course but I can't access it", student1);
+        supportTicketController.saveSupportTicket(supportTicketDto3);
+
 
         System.out.println("\nInitial data added successfully!\n");
         

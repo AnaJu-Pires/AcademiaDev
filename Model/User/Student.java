@@ -25,5 +25,9 @@ public class Student extends User {
     public String getRole(){
         return "Student";
     }
+
+    public void changeSubscriptionPlan(SubscriptionPlan subscriptionPlan) {
+        this.subscriptionPlan = subscriptionPlan;
+    }
     
 }

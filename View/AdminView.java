@@ -46,6 +46,7 @@ public class AdminView {
         System.out.println("6. Resolve support ticket");
         System.out.println("7. Show all courses(active and inactive)");
         System.out.println("8. Exportar dados para CSV");
+        System.out.println("9. Change student subscription plan");
         System.out.println("0. Return to main menu");
 
        
@@ -128,15 +129,16 @@ public class AdminView {
                     Optional<SupportTicketDto> nextTicketOptional = supportTicketController.getNextTicket();
 
                     if (nextTicketOptional.isEmpty()) {
-                        System.out.println("\nFila de suporte vazia. Todos os tickets foram resolvidos!\n");
+                        System.out.println("\nThere are no more tickets to be resolved.\n");
+                        break;
                     }
                     SupportTicketDto ticketToResolve = nextTicketOptional.get();
-                    System.out.println("\n--- Próximo Ticket na Fila ---");
-                    System.out.println("Autor: " + ticketToResolve.getAuthor().getName());
-                    System.out.println("Título: " + ticketToResolve.getTitle());
-                    System.out.println("Mensagem: " + ticketToResolve.getMessage());
+                    System.out.println("\n--- Next Ticket ---");
+                    System.out.println("Author: " + ticketToResolve.getAuthor().getName());
+                    System.out.println("Title: " + ticketToResolve.getTitle());
+                    System.out.println("Message: " + ticketToResolve.getMessage());
                     System.out.println("-----------------------------\n");
-                    System.out.print("O que deseja fazer? (1 - Resolver e Ver Próximo, 0 - Voltar ao Menu): ");
+                    System.out.print("What would you like to do? (1 - Resolve and show next, 2 - Return to menu): ");
                     
                     int action = scanner.nextInt();
                     scanner.nextLine();
@@ -144,15 +146,16 @@ public class AdminView {
                     if (action == 1) {
                         Optional<SupportTicketDto> resolvedTicketOptional = supportTicketController.resolveNextTicket();
                         if (resolvedTicketOptional.isPresent()) {
-                            System.out.println("\nO Ticket foi resolvido com sucesso!");
+                            System.out.println("\nTicket successfully resolved!");
                         } else {
-                            System.out.println("\nOcorreu um erro ao tentar resolver o ticket.");
+                            System.out.println("\nTicket could not be resolved.");
                         }
                     } else {
-                        System.out.println("\nOperação cancelada. Voltando ao menu principal.\n");
+                        System.out.println("\nSomething went wrong, Returning to main menu.\n");
                         break;
                     }
                 }
+                break;
             case 7:
                 List<CourseDto> allCourses = courseController.showCoursesCatalog();
                 System.out.println("\n\n\tAll Courses:\n");
@@ -289,6 +292,35 @@ public class AdminView {
                 
                 
                 
+                break;
+            case 9:
+                int choice1 = 0;
+                String chosen = null;
+                System.out.println("Enter the email of the student whose subscription you want to change:");
+                String studentEmail = scanner.nextLine();
+                 while(true) {
+                        System.out.println("\nChoose a plan:");
+                        System.out.println("1. Basic");
+                        System.out.println("2. Premium");
+                        System.out.print("Enter your choice: ");
+
+                        try {
+                            choice1 = Integer.parseInt(scanner.nextLine());
+
+                            if (choice1 == 1) {
+                                chosen = "Basic";
+                                break;
+                            } else if (choice1 == 2) {
+                                chosen = "Premium";
+                                break;
+                            } else {
+                                System.out.println("Invalid choice.You have to choose a plan. Please enter 1 or 2.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input. Please enter a number.");
+                        }
+                    }
+                studentController.changeSubscriptionPlan(studentEmail, chosen);
                 break;
             case 0:
                 System.out.println("Returning to main menu...");

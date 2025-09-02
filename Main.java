@@ -44,7 +44,7 @@ public class Main {
 
 
         InitialData data = new InitialData();
-        data.addData(adminController, studentController, enrollmentController, admController);
+        data.addData(adminController, studentController, enrollmentController, admController, supportTicketController);
 
         MainView view = new MainView(adminController, studentController, enrollmentController, admController, supportTicketController);
 

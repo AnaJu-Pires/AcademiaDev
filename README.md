@@ -2,6 +2,9 @@
 ### Nome: Ana Júlia Pires Oliveira   Prontuário:GU3042138
 ### Nome: Gabriel de Souza Costa     Prontuário:GU3046583
 ---
+## Exemplos de dados para login
+- Admin: admin@email.com
+- Student: joao@email.com
 
 ## Modelagem e Estrutura do Projeto:
 ### Classes Model:

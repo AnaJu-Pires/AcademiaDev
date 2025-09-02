@@ -28,8 +28,11 @@ public class SupportTicketService {
         if(supportTicket.getTitle() == null || supportTicket.getMessage().isEmpty()) new BusinessException("Title and message are required.");
 
         if(supportTicket.getAuthor().getClass() == StudentDto.class){
+            
             Student student = new Student(supportTicket.getAuthor().getName(), supportTicket.getAuthor().getEmail());
+            
             modelSupportTicket.setAuthor(student);
+
         }else{
             Admin admin = new Admin(supportTicket.getAuthor().getName(), supportTicket.getAuthor().getEmail());
             modelSupportTicket.setAuthor(admin);
@@ -47,7 +50,8 @@ public class SupportTicketService {
             dto.setTitle(ticket.getTitle());
             dto.setMessage(ticket.getMessage());
             if (ticket.getAuthor() instanceof Student) {
-                dto.setAuthor(new StudentDto(ticket.getAuthor().getName()));
+                StudentDto studentDto = new StudentDto(ticket.getAuthor().getName(), ticket.getAuthor().getEmail());
+                dto.setAuthor(studentDto);
             } else {
                 dto.setAuthor(new AdminDto(ticket.getAuthor().getName(), ticket.getAuthor().getEmail()));
             }

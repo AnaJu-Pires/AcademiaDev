@@ -18,6 +18,10 @@ public class StudentDto extends UserDto {
         
     }
 
+    public StudentDto(String name, String email) {
+        super(name, email);
+    }
+
 
 
     public String getSubscriptionPlanDto() {

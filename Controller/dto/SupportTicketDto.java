@@ -16,6 +16,12 @@ public class SupportTicketDto {
         this.author = author;
     }
 
+    public SupportTicketDto(String title, String message, UserDto author) {
+        this.title = title;
+        this.message = message;
+        this.author = author;
+    }
+
     public SupportTicketDto() {}
 
     public Integer getId() {
