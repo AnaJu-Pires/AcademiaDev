@@ -18,19 +18,12 @@ public class Student extends User {
         super(name, email);
     }
     
-   
-
-
-
     public SubscriptionPlan getSubscriptionPlan() {
         return subscriptionPlan;
     }
 
-
-
-    
-
-    
-
+    public String getRole(){
+        return "Student";
+    }
     
 }

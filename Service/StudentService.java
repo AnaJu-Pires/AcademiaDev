@@ -6,6 +6,8 @@ import Model.Policy.PremiumPlan;
 import Model.Policy.SubscriptionPlan;
 import Model.User.Student;
 import Repository.impl.StudentRepositoryImpl;
+import java.util.List;
+import Util.GenericCsvExporter;
 
 public class StudentService {
     private final StudentRepositoryImpl studentRepositoryImpl;
@@ -37,6 +39,12 @@ public class StudentService {
             
         }
         return null;
+    }
+
+    public void exportAllStudents(List<String> fieldsToInclude) {
+        List<Student> students = studentRepositoryImpl.exportAllStudents();
+        String csv = GenericCsvExporter.export(students, fieldsToInclude);
+        System.out.println(csv);
     }
 
     

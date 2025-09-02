@@ -87,6 +87,11 @@ public class StudentView {
                 }
                 enrollmentController.updateProgress(studentDto, courseNameToUpdate, newProgress);
                 break;
+            case 5:
+                System.out.print("Enter the course name to cancel your enrollment: ");
+                String courseNameToCancel = scanner.nextLine();
+                enrollmentController.deleteEnrollment(studentDto, courseNameToCancel);
+                break;
             case 6:
                 SupportTicketDto supportTicketDto = new SupportTicketDto();
                 System.out.println("What is the title of your support ticket?");

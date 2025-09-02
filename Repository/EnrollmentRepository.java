@@ -13,4 +13,6 @@ public interface EnrollmentRepository {
     Enrollment findByStudentEmailAndCourseName(String studentEmail, String courseName);
 
     List<Enrollment> exportAEnrollments();
+
+    void delete(Enrollment enrollment);
 }

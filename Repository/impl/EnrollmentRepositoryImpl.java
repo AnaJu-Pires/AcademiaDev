@@ -40,4 +40,9 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
         return this.enrollments.values().stream().collect(Collectors.toList());
     }
 
+    @Override
+    public void delete(Enrollment enrollment) {
+        this.enrollments.remove(enrollment.getId());
+    }
+
 }

@@ -27,7 +27,7 @@ public class MainView {
     }
 
     public void displayMenu() {
-        AdminView admin = new AdminView(adminController, admController, supportTicketController, enrollmentController);
+        AdminView admin = new AdminView(adminController, admController, supportTicketController, enrollmentController, userController);
         UserView user = new UserView(userController);
         StudentView student = new StudentView(enrollmentController, adminController, userController, supportTicketController);
 

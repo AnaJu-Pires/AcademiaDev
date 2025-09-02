@@ -113,6 +113,18 @@ public class EnrollmentService {
             System.out.println(csv);
         }
 
+        public void deleteEnrollment(StudentDto studentDto, String courseName) {
+            courseRepository.searchByName(courseName)
+                    .orElseThrow(() -> new CourseNotFoundException("The course '" + courseName + "' does not exist."));
+
+            Enrollment enrollment = enrollmentRepository.findByStudentEmailAndCourseName(studentDto.getEmail(), courseName);
+            if (enrollment == null) {
+                throw new EnrollmentNotFoundException("You are not enrolled in the course '" + courseName + "'.");
+            }
+            enrollmentRepository.delete(enrollment);
+            System.out.println("Enrollment deleted successfully.");
+        }
+
 
     
 }

@@ -6,6 +6,8 @@ public class Admin extends User {
         super(name, email);
     }
 
-    
+    public String getRole(){
+        return "Admin";
+    }
     
 }

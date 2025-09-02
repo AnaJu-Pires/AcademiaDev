@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Controller.AdminController;
 import Controller.CourseController;
 import Controller.EnrollmentController;
+import Controller.StudentController;
 import Controller.SupportTicketController;
 import Model.Course.DifficultyLevel;
 import Controller.dto.AdminDto;
@@ -23,12 +24,14 @@ public class AdminView {
     private final AdminController adminController;
     private final SupportTicketController supportTicketController;
     private final EnrollmentController enrollmentController;
+    private final StudentController studentController;
 
-    public AdminView(CourseController courseController, AdminController adminController, SupportTicketController supportTicketController, EnrollmentController enrollmentController) {
+    public AdminView(CourseController courseController, AdminController adminController, SupportTicketController supportTicketController, EnrollmentController enrollmentController, StudentController studentController) {
         this.courseController = courseController;
         this.adminController = adminController;
         this.supportTicketController = supportTicketController;
         this.enrollmentController = enrollmentController;
+        this.studentController = studentController;
     }
 
     public void showAdminMenu(Scanner scanner, AdminDto adminDto) {
@@ -45,9 +48,9 @@ public class AdminView {
         System.out.println("8. Exportar dados para CSV");
         System.out.println("0. Return to main menu");
 
-        // CORREÇÃO 3: Usando o scanner para ler a opção do menu
+       
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Consome a "nova linha" deixada pelo nextInt()
+        scanner.nextLine(); 
 
         switch (choice) {
             case 1:
@@ -165,8 +168,9 @@ public class AdminView {
                 System.out.println("Choose one to export:");
                 System.out.println("1. All Courses");
                 System.out.println("2. Enrolled Courses");
-                System.out.println("3. Users");
-                System.out.println("4. Support Tickets");
+                System.out.println("3. Students");
+                System.out.println("4. Admins");
+                System.out.println("5. Support Tickets");
                 int option = scanner.nextInt(); 
                 int choose = 0;
                 List<String> fieldsToInclude = new ArrayList<>();
@@ -247,14 +251,14 @@ public class AdminView {
                                     } else if (choose == 2) {
                                         fieldsToInclude.add("email");
                                     } else if (choose == 3) {
-                                        //userController.exportAllUsers(fieldsToInclude);
+                                        studentController.exportAllStudents(fieldsToInclude);
                                         break;
                                     }else if(choose == 4){
                                         break;
                                     }
                                 }
                         break;
-                        case 4:
+                        case 5:
                             while(true){
                                 System.out.println("Choose the fields to include:");
                                 System.out.println("1. title");

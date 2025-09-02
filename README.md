@@ -61,18 +61,18 @@
 - Criar novo curso (opcional) ✅
 - Gerenciar Status de Cursos  ✅
 - Gerenciar Planos de Alunos    
-- Atender Tickets de Suporte
+- Atender Tickets de Suporte  ✅
 - Gerar Relatórios(submenu para acessar todas as análises)
 *Obs(não fizemos assim, mas o que acha?)*
-- Exportar Dados CSV
+- Exportar Dados CSV ✅
 ### StudentView:
 - Matricular-se em Curso ✅
 - Consultar Minhas Matrículas (listar os cursos em que está ou foi matriculado, o progresso em cada um e seu status) ✅
 - Atualizar Progresso ✅
-- Cancelar Matrícula(apagar)
+- Cancelar Matrícula(apagar) ✅
 ## Operações Gerais(Admin e Student):
 - Catálogo de Cursos ✅
-- Abrir Ticket de Suporte 
+- Abrir Ticket de Suporte ✅
 *Obs(vamos fazer cada um no seu controller ou criar um pra isso)*
 
 ## Relatórios e Análises

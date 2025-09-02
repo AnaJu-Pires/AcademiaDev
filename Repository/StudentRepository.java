@@ -1,5 +1,6 @@
 package Repository;
 
+import java.util.List;
 import java.util.TreeSet;
 
 import Model.User.Student;
@@ -12,6 +13,6 @@ public interface StudentRepository {
 
     Student findByEmail(String email);
         
-
+    List<Student> exportAllStudents();
     
 }

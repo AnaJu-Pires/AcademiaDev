@@ -42,4 +42,6 @@ public abstract class User {
         //configurar certinho
     }
 
+    public abstract String getRole();
+
 }

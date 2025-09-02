@@ -1,11 +1,32 @@
 package Util;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import java.lang.reflect.Field;
-
 public class GenericCsvExporter {
+
+    /**
+     * Finds a field in the given class or any of its superclasses.
+     *
+     * @param clazz 
+     * @param fieldName 
+     * @return 
+     * @throws NoSuchFieldException 
+     */
+    private static Field findFieldInHierarchy(Class<?> clazz, String fieldName) throws NoSuchFieldException {
+        Class<?> current = clazz;
+        while (current != null) {
+            try {
+               
+                return current.getDeclaredField(fieldName);
+            } catch (NoSuchFieldException e) {
+
+                current = current.getSuperclass();
+            }
+        }
+        throw new NoSuchFieldException("Field '" + fieldName + "' not found in class " + clazz.getName() + " or its superclasses.");
+    }
 
     public static <T> String export(List<T> data, List<String> fieldsToInclude) {
         if (data == null || data.isEmpty() || fieldsToInclude == null || fieldsToInclude.isEmpty()) {
@@ -13,7 +34,6 @@ public class GenericCsvExporter {
         }
 
         try {
-            Class<?> clazz = data.get(0).getClass();
             StringBuilder csvBuilder = new StringBuilder();
 
 
@@ -22,15 +42,20 @@ public class GenericCsvExporter {
 
 
             for (T item : data) {
+
+                Class<?> itemClass = item.getClass(); 
+                
                 String row = fieldsToInclude.stream()
                         .map(fieldName -> {
                             try {
-                                Field field = clazz.getDeclaredField(fieldName);
+
+                                Field field = findFieldInHierarchy(itemClass, fieldName);
                                 field.setAccessible(true);
                                 Object value = field.get(item);
                                 return value != null ? value.toString() : "";
                             } catch (NoSuchFieldException | IllegalAccessException e) {
-                                return "";
+
+                                return ""; 
                             }
                         })
                         .collect(Collectors.joining(","));
@@ -41,7 +66,7 @@ public class GenericCsvExporter {
 
         } catch (Exception e) {
             e.printStackTrace();
-            return "Erro ao gerar CSV: " + e.getMessage();
+            return "Error generating CSV: " + e.getMessage();
         }
     }
 }

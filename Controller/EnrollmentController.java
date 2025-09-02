@@ -48,6 +48,10 @@ public class EnrollmentController {
         this.enrollmentService.exportAllEnrollments(fieldsToInclude);
     }
 
+    public void deleteEnrollment(StudentDto studentDto, String courseName) {
+        this.enrollmentService.deleteEnrollment(studentDto, courseName);
+    }
+
 
     
 }

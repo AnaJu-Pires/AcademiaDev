@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.List;
+
 import Controller.dto.StudentDto;
 import Service.StudentService;
 
@@ -17,6 +19,10 @@ public class StudentController {
 
     public StudentDto loginStudent(String email) {
         return studentService.loginStudent(email);
+    }
+
+    public void exportAllStudents(List<String> fieldsToInclude) {
+        studentService.exportAllStudents(fieldsToInclude);
     }
 
     
